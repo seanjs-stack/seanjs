@@ -7,9 +7,16 @@ Welcome to **SEAN.JS** Stack, the most powerful NodeJS Framework!
 - AngularJS
 - NodeJS
 
+**SequilizeJS**
+
+Sequelize is a promise-based ORM for Node.js and io.js. It supports the dialects PostgreSQL, MySQL,
+MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and
+more.
+
+
 # Under Development!
 
-For more info, please visit http://seanjs.org/status for more info
+For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
 
 ### Installation
 ```sh
