@@ -1,7 +1,7 @@
 {
   "name": "seanjs",
   "description": "Full-Stack Javascript with SequelizeJS, ExpressJS, AngularJS, and NodeJS",
-  "homepage": "http://seanjs.io",
+  "homepage": "http://seanjs.org",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "~3",
