@@ -1,0 +1,152 @@
+<section ng-controller="HomeController">
+  <div class="jumbotron text-center">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        <img ng-src="modules/core/client/img/brand/logo.png" alt="SEAN.JS Stack" class="img-responsive text-center" />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <p class="lead">Open-Source Full-Stack Javascript Solution For SEAN Applications</p>
+    </div>
+    <div class="row">
+      <p>
+        <a class="btn btn-default btn-lg" href="https://github.com/seanjs-stack" target="_blank">View on Github</a>
+        <a class="btn btn-primary btn-lg" href="http://seanjs.org/docs" target="_blank">SEAN.JS Documentation</a>
+      </p>
+    </div>
+  </div>
+  <div>
+<hr />
+<div class="row">
+  <h2 class="text-center">Congratulations! You've configured and ran the sample application!</h2>
+</div>
+<hr />
+<accordion>
+    <accordion-group heading="What is SEAN.JS?" is-open="true">
+      <p>
+        SEAN.JS is a Full-Stack Javascript for an easy starting point with 
+
+        <a href="http://sequelize.readthedocs.org/en/latest" target="_blank" class="seanjs"><span class="seanjs-capital">S</span>equelize</a>, 
+
+        <a href="http://expressjs.com/" target="_blank" class="seanjs"><span class="seanjs-capital">E</span>xpress</a>, 
+
+        <a href="http://angularjs.org/" target="_blank" class="seanjs"><span class="seanjs-capital">A</span>ngularJS</a> and 
+
+        <a href="http://nodejs.org/" target="_blank" class="seanjs"><span class="seanjs-capital">N</span>ode.js</a> 
+
+        based applications.<br />
+        It is designed to give you a quick and organized way to start developing SEAN based web apps.
+      </p>
+
+      <b>Configured with</b>
+      <ul>
+
+        <li><a href="https://github.com/optimalbits/node_acl" target="_blank">RedisStore:</a> Redis session store backed by node_redis, and is insanely fast!</li>
+        <li><a href="https://github.com/optimalbits/node_acl" target="_blank">ACL:</a> An Access Control List module, based on Redis with Express middleware support</li>
+        <li><a href="https://github.com/caolan/async" target="_blank">Async:</a> Higher-order functions and common patterns for asynchronous code</li>
+        <li><a href="https://github.com/jaredhanson/passport" target="_blank">Passport:</a> Simple, unobtrusive authentication for Node.js</li>
+        <li><a href="https://github.com/socketio/socket.io" target="_blank">Socket.io:</a> Node.js realtime framework server</li>
+        <li>And many more...</li>
+      </ul>
+    </accordion-group>
+    <accordion-group heading="What is next?">
+      Before you get deeper into the code, we suggest to go through the foundation technologies:
+      <ul>
+        <li><a href="http://sequelize.readthedocs.org/en/latest" target="_blank">Sequelize</a></li>
+        <li><a href="http://expressjs.com/" target="_blank">Express</a></li>
+        <li><a href="http://angularjs.org/" target="_blank">AngularJS</a></li>
+        <li><a href="http://nodejs.org/" target="_blank">Node.js</a></li>
+      </ul>
+      <hr />
+      As for the front-end: <a href="https://angular-ui.github.io/bootstrap/" target="_blank">Angular UI Bootstrap</a> 
+      <hr />
+      And as for the Session Store: <a href="https://github.com/optimalbits/node_acl" target="_blank">RedisStore</a> (<b>Redis</b>)<br />
+        <ul>
+          <li><a href="http://redis.io/topics/quickstart" target="_blank">Install Redis</a></li>
+          <li>Configuration file: <code>/config/lib/express.js in <b>initSession</b></code></li>
+        </ul>
+      <hr />
+      Afterwards:
+     <ul>
+      <li>Configure your Database (<a href="http://www.postgresql.org/download/" target="_blank">PostgreSQL</a>)</li>
+      <li>Configure your app to work with your social accounts, by editing the <code>/config/env/*.js</code> files.</li>
+      <li>Edit your user module.</li>
+      <li>Add new CRUD modules.</li>
+      <li>Head to the <a ui-sref="authentication.signup">Sign up</a> page to start playing around!</li>
+      <li>Have fun!</li>
+     </ul>
+
+    </accordion-group>
+    <accordion-group heading="Need Help?">
+      <h5>Don't worry! We got your back with our AWESOME community...</h5>
+      <ul>
+        <li><a href="#" target="_blank">SEAN.JS Stack Documentation</a></li>
+        <li><a href="#" target="_blank">Stack Overflow</a></li>
+        <li><a href="#" target="_blank">Blog</a>
+        </li>
+      </ul>
+    </accordion-group>
+  </accordion>
+
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <p>
+             <a href="http://sequelize.readthedocs.org/en/latest" target="_blank">
+            <img alt="Sequelize" class="img-responsive text-center" src="modules/core/client/img/sample/sequelize.png" />
+          </a>
+            <hr />
+            <a href="http://sequelize.readthedocs.org/en/latest" target="_blank">Sequelize</a> 
+            is a promise-based ORM for Node.js and io.js. It supports the dialects PostgreSQL, MySQL,
+            MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and
+            more.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <p>
+            <a href="http://expressjs.com/" target="_blank">
+            <img alt="Express" class="img-responsive text-center" src="modules/core/client/img/sample/express.png" />
+          </a>
+            <hr />
+            <a href="http://expressjs.com/" target="_blank">Express</a> is a minimal and flexible node.js web application framework, providing a robust set of features for building single and multi-page, and hybrid web applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <p>
+            <a href="http://angularjs.org/" target="_blank">
+            <img alt="AngularJS" class="img-responsive text-center" src="modules/core/client/img/sample/angularjs.png" />
+          </a>
+            <hr />
+            <a href="http://angularjs.org/" target="_blank">AngularJS</a> lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <p>
+            <a href="http://nodejs.org/" target="_blank">
+            <img alt="Node.js" class="img-responsive text-center" src="modules/core/client/img/sample/nodejs.png" />
+          </a>
+            <hr />
+            <a href="http://nodejs.org/" target="_blank">Node.js</a> is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
