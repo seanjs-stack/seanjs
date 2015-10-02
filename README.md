@@ -38,6 +38,10 @@ $ yo seanjs
 
 You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
 
+## Contribution
+
+SOON...
+
 ## Credits
 Inspired by the great work of the [MEANJS](http://meanjs.org) team and indirectly by [Madhusudhan Srinivasa](https://github.com/madhums/)
 The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs)
