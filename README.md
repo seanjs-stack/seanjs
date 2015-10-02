@@ -2,10 +2,10 @@
 
 Welcome to **SEAN.JS** Stack, the most powerful NodeJS Framework!
 
-- PostgreSQL
-- ExpressJS
-- AngularJS
-- NodeJS
+- [SequilizeJS](http://sequelize.readthedocs.org/en/latest/)
+- [ExpressJS](http://expressjs.com/)
+- [AngularJS](https://angularjs.org/)
+- [NodeJS](https://nodejs.org/en/)
 
 **SequilizeJS**
 
@@ -36,7 +36,7 @@ $  npm install -g generator-seanjs
 $ yo seanjs
 ```
 
-You are now ready to get started with the SEAN.JS Stack generator. The generator will help you create a SEAN.JS application.
+You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
 
 ## Credits
 Inspired by the great work of the [MEANJS](http://meanjs.org) team and indirectly by [Madhusudhan Srinivasa](https://github.com/madhums/)
