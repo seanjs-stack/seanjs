@@ -59,7 +59,7 @@ exports.changeProfilePicture = function (req, res) {
    var oldImage = user.profileImageURL;
 
    if (user) {
-      fs.writeFile(__dirname + './public/uploads/users/profile/' + req.files.file.name, req.files.file.buffer, function (uploadError) {
+      fs.writeFile('./public/uploads/users/profile/' + req.files.file.name, req.files.file.buffer, function (uploadError) {
          if (uploadError) {
             console.log('uploadError', uploadError);
             return res.status(400).send({

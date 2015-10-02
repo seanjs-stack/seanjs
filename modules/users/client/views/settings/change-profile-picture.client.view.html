@@ -3,17 +3,12 @@
   <form class="signin form-horizontal">
    <fieldset>
     <div class="form-group text-center">
-     
-          <span ng-switch on="user.displayName">
-      <span ng-switch-when="user.displayName">
-     <img ng-src="./uploads/users/profile/{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+      <span ng-if="imageURL">
+        <img ng-src="./uploads/users/profile/{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
       </span>
-      <span ng-switch-default>
+      <span ng-if="!imageURL">
        <img ng-src="./modules/core/client/img/brand/favicon.png" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture" />
       </span>
-     </span>
-     
-     
     </div>
     <div class="text-center form-group" ng-hide="uploader.queue.length">
      <span class="btn btn-default btn-file">
