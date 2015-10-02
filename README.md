@@ -16,6 +16,8 @@ more.
 
 # Under Development!
 
+[![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
 
 ### Installation
