@@ -1,24 +1,27 @@
 ![alt tag](http://www.seanjs.org/modules/core/client/img/brand/logo.png)
 
-Welcome to **SEAN.JS** Stack, the most powerful NodeJS Framework!
+**SEAN.JS** is a Full-Stack Javascript for an easy starting point with [**S**equilizeJS](http://sequelize.readthedocs.org/en/latest/), [**E**xpressJS](http://expressjs.com/), [**A**ngularJS](https://angularjs.org/) and [**N**odeJS](https://nodejs.org/en/) based applications.
+It is designed to give you a quick and organized way to start developing SEAN based web apps.
 
-- [SequilizeJS](http://sequelize.readthedocs.org/en/latest/)
-- [ExpressJS](http://expressjs.com/)
-- [AngularJS](https://angularjs.org/)
-- [NodeJS](https://nodejs.org/en/)
+## Configured with
+* [RedisStore](https://github.com/optimalbits/node_acl): Redis session store backed by node_redis, and is insanely fast!
+* [ACL](https://github.com/optimalbits/node_acl): An Access Control List module, based on Redis with Express middleware support
+* [Async](https://github.com/caolan/async): Higher-order functions and common patterns for asynchronous code
+* [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js (Facebook, Twitter, LinkedIn, Google and PayPal)
+* [Socket.io](https://github.com/socketio/socket.io): Node.js realtime framework server
+* And many more...
 
-**SequilizeJS**
+Based on **MEAN Stack**
 
-Sequelize is a promise-based ORM for Node.js and io.js. It supports the dialects PostgreSQL, MySQL,
-MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and
-more.
-
+---
 
 # Under Development!
 
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
+
+--- 
 
 ### Installation
 ```sh
@@ -38,15 +41,21 @@ $ yo seanjs
 
 You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
 
+---
+
 ## Contribution
 
 SOON...
+
+---
 
 ## Credits
 Inspired by the great work of the [MEANJS](http://meanjs.org) team and indirectly by [Madhusudhan Srinivasa](https://github.com/madhums/)
 The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs)
 
 The SEAN.JS (SEANJS) name is coined by [Omar Massad](https://github.com/Massad)
+
+---
 
 ## License
 (The MIT License)
