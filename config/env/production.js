@@ -7,15 +7,6 @@ module.exports = {
     certificate: './config/sslcerts/cert.pem'
   },
   port: process.env.PORT || 8443,
-  // db: {
-  //   uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
-  //   options: {
-  //     user: '',
-  //     pass: ''
-  //   },
-  //   // Enable mongoose debug mode
-  //   debug: process.env.MONGODB_DEBUG || false
-  // },
   db: {
     name: "seanjs-dev",
     host: "localhost",
@@ -74,6 +65,5 @@ module.exports = {
         pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
       }
     }
-  },
-  seedDB: process.env.MONGO_SEED || false
+  }
 };
