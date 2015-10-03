@@ -32,13 +32,11 @@
   <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
    <li class="dropdown" dropdown>
     <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
-     <span ng-switch on="authentication.user">
-      <span ng-switch-when="authentication.user.profileImageURL">
-       <img ng-src="/uploads/users/profile/{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-      </span>
-      <span ng-switch-default>
-       <img ng-src="/modules/core/client/img/brand/favicon.png" alt="{{authentication.user.displayName}}" class="header-profile-image-default" />
-      </span>
+     <span ng-if="authentication.user.profileImageURL">
+      <img ng-src="/uploads/users/profile/{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+     </span>
+     <span ng-if="!authentication.user.profileImageURL">
+      <img ng-src="/modules/core/client/img/brand/favicon.png" alt="{{authentication.user.displayName}}" class="header-profile-image-default" />
      </span>
      <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
     </a>
