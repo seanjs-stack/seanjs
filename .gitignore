@@ -19,7 +19,7 @@ coverage/
 # SEAN.JS app and assets
 # ======================
 public/dist/
-public/users/profile/**
+public/uploads/users/profile/*
 config/env/local.js
 *.pem
 
