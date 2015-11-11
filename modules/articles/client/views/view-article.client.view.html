@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1 ng-bind="article.title"></h1>
   </div>
-  <div class="pull-right" ng-show="authentication.user.id == article.User.id">
+  <div class="pull-right" ng-show="authentication.user.id == article.user.id || article.user.roles.indexOf('admin') != -1">
     <a class="btn btn-primary" ui-sref="articles.edit({articleId: article.id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>

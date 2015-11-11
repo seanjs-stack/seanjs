@@ -34,6 +34,8 @@ exports.signup = function (req, res) {
    //MUST DELETE THIS WHEN PRODUCTION
    if (req.body.is_admin === true) {
       user.roles = ["admin", "user"];
+   }else{
+      user.roles = ["user"];
    }
 
    user.save().then(function () {
@@ -164,7 +166,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                      provider: providerUserProfile.provider,
                      providerData: providerUserProfile.providerData
                   });
-
+		  
+		  user.roles = ["user"];
+		 
                   // And save the user
                   user.save().then(function (saved) {
                      return done((!saved) ? true : false, user);
