@@ -30,7 +30,7 @@ exports.update = function (req, res) {
       user.save().then(function (user) {
          if (!user) {
             return res.status(400).send({
-               message: errorHandler.getErrorMessage(err)
+               message: 'Unable to update'
             });
          } else {
             req.login(user, function (err) {
@@ -43,7 +43,7 @@ exports.update = function (req, res) {
          }
       }).catch(function (err) {
          res.status(400).send({
-            message: 'User is not signed in'
+            message: errorHandler.getErrorMessage(err)
          });
       });
 
@@ -61,7 +61,6 @@ exports.changeProfilePicture = function (req, res) {
    if (user) {
       fs.writeFile('./public/uploads/users/profile/' + req.files.file.name, req.files.file.buffer, function (uploadError) {
          if (uploadError) {
-            console.log('uploadError', uploadError);
             return res.status(400).send({
                message: 'Error occurred while uploading profile picture'
             });
