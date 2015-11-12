@@ -13,15 +13,15 @@ acl = new acl(new acl.memoryBackend());
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
-    allows: [{
-      resources: '/api/users',
-      permissions: '*'
-    }, {
-      resources: '/api/users/:userId',
-      permissions: '*'
-    }]
-  }]);
+      roles: ['admin'],
+      allows: [{
+	  resources: '/api/admin/user',
+	  permissions: '*'
+	}, {
+	  resources: '/api/admin/user/:userId',
+	  permissions: '*'
+	}]
+    }]);
 };
 
 /**
@@ -37,12 +37,12 @@ exports.isAllowed = function (req, res, next) {
       return res.status(500).send('Unexpected authorization error');
     } else {
       if (isAllowed) {
-        // Access granted! Invoke next middleware
-        return next();
+	// Access granted! Invoke next middleware
+	return next();
       } else {
-        return res.status(403).json({
-          message: 'User is not authorized'
-        });
+	return res.status(403).json({
+	  message: 'User is not authorized'
+	});
       }
     }
   });

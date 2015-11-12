@@ -1,40 +1,78 @@
 <section>
-  <div class="page-header">
-    <h1>User <span ng-bind="user.username"></span></h1>
-  </div>
-  <div class="col-md-12">
-    <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required />
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required />
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="roles">Roles</label>
-          <div class="controls">
-            <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
-            <div ng-messages="userForm.roles.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">At least one role is required.</p>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Update" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
+  <br /><br />
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th colspan="2">Editing {{user.username}}</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr class="form-group" show-errors>
+	      <td><label for="firstName">First Name</label></td>
+	      <td>
+		<input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required />
+		<div ng-messages="userForm.firstName.$error" role="alert">
+		  <p class="help-block error-text" ng-message="required">First name is required.</p>
+		</div>
+	      </td>
+	    </tr>
+	    <tr class="form-group" show-errors>
+	      <td><label for="lastName">Last Name</label></td>
+	      <td>
+		<input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required />
+		<div ng-messages="userForm.lastName.$error" role="alert">
+		  <p class="help-block error-text" ng-message="required">Last name is required.</p>
+		</div>
+	      </td>
+	    </tr>
+	    <tr class="form-group" show-errors>
+	      <td><label for="email">Email</label></td>
+	      <td>
+		<input type="text" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" required />
+		<div ng-messages="userForm.email.$error" role="alert">
+		  <p class="help-block error-text" ng-message="required">Email is required.</p>
+		</div>
+	      </td>
+	    </tr>
+	    <tr class="form-group" show-errors>
+	      <td><label for="username">Username</label></td>
+	      <td>
+		<input type="text" id="email" name="username" class="form-control" ng-model="user.username" placeholder="Username" required />
+		<div ng-messages="userForm.username.$error" role="alert">
+		  <p class="help-block error-text" ng-message="required">Username is required.</p>
+		</div>
+	      </td>
+	    </tr>
+	    <tr class="form-group" show-errors>
+	      <td><label class="control-label" for="roles">Roles</label></td>
+	      <td>
+		<div class="controls">
+		  <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
+		  <div ng-messages="userForm.roles.$error" role="alert">
+		    <p class="help-block error-text" ng-message="required">At least one role is required. For example: user, admin</p>
+		  </div>
+	      </td>
+	    </tr>
+	  </tbody>
+	  <tfoot>
+	    <tr>
+	      <td colspan="2" align="center">
+		<div class="form-group">
+		  <input type="submit" value="Update" class="btn btn-default btn-block">
+		</div>
+		<div ng-show="error" class="text-danger">
+		  <strong ng-bind="error"></strong>
+		</div>
+	      </td>
+	    </tr>
+	  </tfoot>
+	</table>
+
+      </form>
+    </div>
   </div>
 </section>

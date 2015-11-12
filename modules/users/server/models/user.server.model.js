@@ -45,7 +45,6 @@ module.exports = function (sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       unique: true,
-      defaultValue: '',
       validate: {
 	isEmail: {
 	  msg: 'Please fill a valid email address'
