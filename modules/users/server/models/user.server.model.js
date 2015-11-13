@@ -9,7 +9,7 @@ var crypto = require('crypto');
 /**
  * A Validation function for local strategy properties
  */
-var validateLocalStrategyProperty = function (property) {
+var validateLocalStrategyProperty = function(property) {
   if (((this.provider !== 'local' && !this.updated) || property.length !== 0) === false) {
     throw new Error('Local strategy failed');
   }
@@ -18,26 +18,26 @@ var validateLocalStrategyProperty = function (property) {
 /**
  * A Validation function for local strategy password
  */
-var validateLocalStrategyPassword = function (password) {
+var validateLocalStrategyPassword = function(password) {
   if ((this.provider !== 'local' || (password && password.length > 6)) === false) {
     throw new Error('One field is missing');
   }
 };
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('user', {
     firstName: {
       type: DataTypes.STRING,
       defaultValue: '',
       validate: {
-	isValid: validateLocalStrategyProperty
+        isValid: validateLocalStrategyProperty
       }
     },
     lastName: {
       type: DataTypes.STRING,
       defaultValue: '',
       validate: {
-	isValid: validateLocalStrategyProperty
+        isValid: validateLocalStrategyProperty
       }
     },
     displayName: {
@@ -48,10 +48,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       unique: true,
       validate: {
-	isEmail: {
-	  msg: 'Please fill a valid email address'
-	},
-	isValid: validateLocalStrategyProperty
+        isEmail: {
+          msg: 'Please fill a valid email address'
+        },
+        isValid: validateLocalStrategyProperty
       }
     },
     username: {
@@ -65,7 +65,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       default: '',
       validate: {
-	isValid: validateLocalStrategyPassword
+        isValid: validateLocalStrategyPassword
       }
     },
     provider: DataTypes.STRING,
@@ -82,40 +82,40 @@ module.exports = function (sequelize, DataTypes) {
     resetPasswordExpires: DataTypes.BIGINT
   }, {
     instanceMethods: {
-      makeSalt: function () {
-	return crypto.randomBytes(16).toString('base64');
+      makeSalt: function() {
+        return crypto.randomBytes(16).toString('base64');
       },
-      authenticate: function (plainText) {
-	return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
+      authenticate: function(plainText) {
+        return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
       },
-      encryptPassword: function (password, salt) {
-	if (!password || !salt)
-	  return '';
-	salt = new Buffer(salt, 'base64');
-	return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+      encryptPassword: function(password, salt) {
+        if (!password || !salt)
+          return '';
+        salt = new Buffer(salt, 'base64');
+        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
       }
     },
     classMethods: {
-      findUniqueUsername: function (username, suffix, callback) {
-	var _this = this;
-	var possibleUsername = username + (suffix || '');
+      findUniqueUsername: function(username, suffix, callback) {
+        var _this = this;
+        var possibleUsername = username + (suffix || '');
 
-	_this.find({
-	  where: {
-	    username: possibleUsername
-	  }
-	}).then(function (user) {
-	  if (!user) {
-	    callback(possibleUsername);
-	  } else {
-	    return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
-	  }
-	});
+        _this.find({
+          where: {
+            username: possibleUsername
+          }
+        }).then(function(user) {
+          if (!user) {
+            callback(possibleUsername);
+          } else {
+            return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+          }
+        });
       }
     },
-    associate: function (models) {
+    associate: function(models) {
       if (models.article) {
-	User.hasMany(models.article);
+        User.hasMany(models.article);
       }
     }
   });

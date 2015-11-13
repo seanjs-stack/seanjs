@@ -52,8 +52,8 @@
       // create mock article
       mockArticle = new Articles({
         _id: '525a8422f6d0f87f0e407a33',
-        title: 'An Article about MEAN',
-        content: 'MEAN rocks!'
+        title: 'An Article about SEANJS',
+        content: 'SEANJS rocks!'
       });
 
       // Mock logged in user
@@ -103,13 +103,13 @@
       beforeEach(function () {
         // Create a sample article object
         sampleArticlePostData = new Articles({
-          title: 'An Article about MEAN',
-          content: 'MEAN rocks!'
+          title: 'An Article about SEANJS',
+          content: 'SEANJS rocks!'
         });
 
         // Fixture mock form input values
-        scope.title = 'An Article about MEAN';
-        scope.content = 'MEAN rocks!';
+        scope.title = 'An Article about SEANJS';
+        scope.content = 'SEANJS rocks!';
 
         spyOn($location, 'path');
       });

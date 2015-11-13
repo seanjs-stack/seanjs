@@ -161,7 +161,7 @@ var initGlobalConfig = function () {
   // Merge config files
   var config = _.merge(defaultConfig, environmentConfig);
 
-  // read package.json for MEAN.JS project information
+  // read package.json for SEANJS project information
   var pkg = require(path.resolve('./package.json'));
   config.seanjs = pkg;
 
@@ -169,7 +169,7 @@ var initGlobalConfig = function () {
   // production or development environment. If test environment is used we don't merge it with local.js
   // to avoid running test suites on a prod/dev environment (which delete records and make modifications)
   if (process.env.NODE_ENV !== 'test') {
-    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});  
+    config = _.merge(config, (fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js'))) || {});
   }
 
   // Initialize global globbed files

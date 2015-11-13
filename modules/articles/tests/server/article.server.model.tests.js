@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 var should = require('should'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  Article = mongoose.model('Article');
+  path = require('path'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  db = require(path.resolve('./config/lib/sequelize')).models,
+  Article = db.article,
+  User = db.user;
 
 /**
  * Globals
@@ -16,50 +18,59 @@ var user, article;
 /**
  * Unit tests
  */
-describe('Article Model Unit Tests:', function () {
-  beforeEach(function (done) {
-    user = new User({
-      firstName: 'Full',
-      lastName: 'Name',
-      displayName: 'Full Name',
-      email: 'test@test.com',
-      username: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
-    });
+describe('Article Model Unit Tests:', function() {
+  beforeEach(function(done) {
 
-    user.save(function () {
-      article = new Article({
+    user = User.build();
+
+    user.firstName = 'Full';
+    user.lastName = 'Name';
+    user.displayName = 'Full Name';
+    user.email = 'test@test.com';
+    user.username = 'username';
+    user.salt = user.makeSalt();
+    user.hashedPassword = user.encryptPassword('S3@n.jsI$Aw3$0m3', user.salt);
+
+    user.save().then(function() {
+      article = Article.build({
         title: 'Article Title',
         content: 'Article Content',
-        user: user
+        userId: user.id
       });
-
       done();
-    });
+    }).catch(function(err) {});
+
   });
 
-  describe('Method Save', function () {
-    it('should be able to save without problems', function (done) {
+  describe('Method Save', function() {
+    it('should be able to save without problems', function(done) {
       this.timeout(10000);
-      return article.save(function (err) {
-        should.not.exist(err);
+      article.save().then(function(err) {
+        should.not.exist((err) ? null : err);
         done();
-      });
+      }).catch(function(err) {});
+
     });
 
-    it('should be able to show an error when try to save without title', function (done) {
+    it('should be able to show an error when try to save without title', function(done) {
       article.title = '';
 
-      return article.save(function (err) {
-        should.exist(err);
+      return article.save().then(function(err) {
+        should.exist(null);
+        done();
+      }).catch(function(err) {
+        should.exist(errorHandler.getErrorMessage(err));
         done();
       });
+
     });
   });
 
-  afterEach(function (done) {
-    Article.remove().exec(function () {
-      User.remove().exec(done);
-    });
+  afterEach(function(done) {
+    //article.destroy().then(function() {
+      user.destroy().then(function() {
+        done();
+      }).catch(function(err) {});
+    //}).catch(function(err) {});
   });
 });

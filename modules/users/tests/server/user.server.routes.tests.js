@@ -3,8 +3,9 @@
 var should = require('should'),
   request = require('supertest'),
   path = require('path'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
+  sequelize = require(path.resolve('./config/lib/sequelize-connect')),
+  db = require(path.resolve('./config/lib/sequelize')).models,
+  User = db.user,
   express = require(path.resolve('./config/lib/express'));
 
 /**
@@ -15,20 +16,20 @@ var app, agent, credentials, user, _user, admin;
 /**
  * User routes tests
  */
-describe('User CRUD tests', function () {
-  before(function (done) {
+describe('User CRUD tests', function() {
+  before(function(done) {
     // Get application
-    app = express.init(mongoose);
+    app = express.init(sequelize);
     agent = request.agent(app);
 
     done();
   });
 
-  beforeEach(function (done) {
+  beforeEach(function(done) {
     // Create user credentials
     credentials = {
       username: 'username',
-      password: 'M3@n.jsI$Aw3$0m3'
+      password: 'S3@n.jsI$Aw3$0m3'
     };
 
     // Create a new user
@@ -39,19 +40,20 @@ describe('User CRUD tests', function () {
       email: 'test@test.com',
       username: credentials.username,
       password: credentials.password,
-      provider: 'local'
+      provider: 'local',
+      roles: ["admin", "user"]
     };
 
-    user = new User(_user);
+    user = User.build(_user);
 
     // Save a user to the test db and create new article
-    user.save(function (err) {
+    user.save().then(function(err) {
       should.not.exist(err);
       done();
-    });
+    }).catch(function(err) {});
   });
 
-  it('should be able to register a new user', function (done) {
+  it('should be able to register a new user', function(done) {
 
     _user.username = 'register_new_user';
     _user.email = 'register_new_user_@test.com';
@@ -59,7 +61,7 @@ describe('User CRUD tests', function () {
     agent.post('/api/auth/signup')
       .send(_user)
       .expect(200)
-      .end(function (signupErr, signupRes) {
+      .end(function(signupErr, signupRes) {
         // Handle signpu error
         if (signupErr) {
           return done(signupErr);
@@ -76,11 +78,11 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should be able to login successfully and logout successfully', function (done) {
+  it('should be able to login successfully and logout successfully', function(done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
-      .end(function (signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -89,7 +91,7 @@ describe('User CRUD tests', function () {
         // Logout
         agent.get('/api/auth/signout')
           .expect(302)
-          .end(function (signoutErr, signoutRes) {
+          .end(function(signoutErr, signoutRes) {
             if (signoutErr) {
               return done(signoutErr);
             }
@@ -101,11 +103,11 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to retrieve a list of users if not admin', function (done) {
+  it('should not be able to retrieve a list of users if not admin', function(done) {
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
-      .end(function (signinErr, signinRes) {
+      .end(function(signinErr, signinRes) {
         // Handle signin error
         if (signinErr) {
           return done(signinErr);
@@ -114,7 +116,7 @@ describe('User CRUD tests', function () {
         // Request list of users
         agent.get('/api/users')
           .expect(403)
-          .end(function (usersGetErr, usersGetRes) {
+          .end(function(usersGetErr, usersGetRes) {
             if (usersGetErr) {
               return done(usersGetErr);
             }
@@ -124,15 +126,15 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should be able to retrieve a list of users if admin', function (done) {
+  it('should be able to retrieve a list of users if admin', function(done) {
     user.roles = ['user', 'admin'];
 
-    user.save(function (err) {
+    user.save(function(err) {
       should.not.exist(err);
       agent.post('/api/auth/signin')
         .send(credentials)
         .expect(200)
-        .end(function (signinErr, signinRes) {
+        .end(function(signinErr, signinRes) {
           // Handle signin error
           if (signinErr) {
             return done(signinErr);
@@ -141,7 +143,7 @@ describe('User CRUD tests', function () {
           // Request list of users
           agent.get('/api/users')
             .expect(200)
-            .end(function (usersGetErr, usersGetRes) {
+            .end(function(usersGetErr, usersGetRes) {
               if (usersGetErr) {
                 return done(usersGetErr);
               }
@@ -155,15 +157,15 @@ describe('User CRUD tests', function () {
     });
   });
 
-  it('should be able to get a single user details if admin', function (done) {
+  it('should be able to get a single user details if admin', function(done) {
     user.roles = ['user', 'admin'];
 
-    user.save(function (err) {
+    user.save(function(err) {
       should.not.exist(err);
       agent.post('/api/auth/signin')
         .send(credentials)
         .expect(200)
-        .end(function (signinErr, signinRes) {
+        .end(function(signinErr, signinRes) {
           // Handle signin error
           if (signinErr) {
             return done(signinErr);
@@ -172,7 +174,7 @@ describe('User CRUD tests', function () {
           // Get single user information from the database
           agent.get('/api/users/' + user._id)
             .expect(200)
-            .end(function (userInfoErr, userInfoRes) {
+            .end(function(userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
               }
@@ -187,15 +189,15 @@ describe('User CRUD tests', function () {
     });
   });
 
-  it('should be able to update a single user details if admin', function (done) {
+  it('should be able to update a single user details if admin', function(done) {
     user.roles = ['user', 'admin'];
 
-    user.save(function (err) {
+    user.save().then(function(err) {
       should.not.exist(err);
       agent.post('/api/auth/signin')
         .send(credentials)
         .expect(200)
-        .end(function (signinErr, signinRes) {
+        .end(function(signinErr, signinRes) {
           // Handle signin error
           if (signinErr) {
             return done(signinErr);
@@ -212,7 +214,7 @@ describe('User CRUD tests', function () {
           agent.put('/api/users/' + user._id)
             .send(userUpdate)
             .expect(200)
-            .end(function (userInfoErr, userInfoRes) {
+            .end(function(userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
               }
@@ -227,18 +229,18 @@ describe('User CRUD tests', function () {
               return done();
             });
         });
-    });
+    }).catch(function(err) {});
   });
 
-  it('should be able to delete a single user if admin', function (done) {
+  it('should be able to delete a single user if admin', function(done) {
     user.roles = ['user', 'admin'];
 
-    user.save(function (err) {
+    user.save().then(function(err) {
       should.not.exist(err);
       agent.post('/api/auth/signin')
         .send(credentials)
         .expect(200)
-        .end(function (signinErr, signinRes) {
+        .end(function(signinErr, signinRes) {
           // Handle signin error
           if (signinErr) {
             return done(signinErr);
@@ -247,7 +249,7 @@ describe('User CRUD tests', function () {
           agent.delete('/api/users/' + user._id)
             //.send(userUpdate)
             .expect(200)
-            .end(function (userInfoErr, userInfoRes) {
+            .end(function(userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
               }
@@ -259,10 +261,12 @@ describe('User CRUD tests', function () {
               return done();
             });
         });
-    });
+    }).catch(function(err) {});
   });
 
-  afterEach(function (done) {
-    User.remove().exec(done);
+  afterEach(function(done) {
+    user.destroy().then(function() {
+      done();
+    }).catch(function(err) {});
   });
 });
