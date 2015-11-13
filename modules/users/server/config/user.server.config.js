@@ -30,7 +30,7 @@ module.exports = function(app, db) {
     }).then(function(user) {
       var err = (!user) ? true : false;
       done(err, user);
-    })
+    });
   });
 
   // Initialize strategies

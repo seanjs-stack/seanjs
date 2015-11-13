@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 var path = require('path'),
-	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-	passport = require('passport'),
-	db = require(path.resolve('./config/lib/sequelize')).models,
-	User = db.user;
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  passport = require('passport'),
+  db = require(path.resolve('./config/lib/sequelize')).models,
+  User = db.user;
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -18,7 +18,7 @@ var noReturnUrls = [
 /**
  * Signup
  */
-exports.signup = function (req, res) {
+exports.signup = function(req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -38,13 +38,14 @@ exports.signup = function (req, res) {
     user.roles = ["user"];
   }
 
-  user.save().then(function () {
-    req.login(user, function (err) {
+  user.save().then(function() {
+    req.login(user, function(err) {
       if (err)
-	return next(err);
+        //return next(err);
+        res.status(400).send(err);
       res.json(user);
     });
-  }).catch(function (err) {
+  }).catch(function(err) {
     res.status(400).send(err);
   });
 };
@@ -52,9 +53,9 @@ exports.signup = function (req, res) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function (req, res, next) {
+exports.signin = function(req, res, next) {
 
-  passport.authenticate('local', function (err, user, info) {
+  passport.authenticate('local', function(err, user, info) {
 
     if (err || !user) {
       res.status(400).send(info);
@@ -63,12 +64,12 @@ exports.signin = function (req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
-	if (err) {
-	  res.status(400).send(err);
-	} else {
-	  res.json(user);
-	}
+      req.login(user, function(err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
       });
     }
   })(req, res, next);
@@ -77,7 +78,7 @@ exports.signin = function (req, res, next) {
 /**
  * Signout
  */
-exports.signout = function (req, res) {
+exports.signout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
@@ -85,8 +86,8 @@ exports.signout = function (req, res) {
 /**
  * OAuth provider call
  */
-exports.oauthCall = function (strategy, scope) {
-  return function (req, res, next) {
+exports.oauthCall = function(strategy, scope) {
+  return function(req, res, next) {
     // Set redirection path on session.
     // Do not redirect to a signin or signup page
     if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
@@ -100,25 +101,25 @@ exports.oauthCall = function (strategy, scope) {
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
-  return function (req, res, next) {
+exports.oauthCallback = function(strategy) {
+  return function(req, res, next) {
     // Pop redirect URL from session
     var sessionRedirectURL = req.session.redirect_to;
     delete req.session.redirect_to;
 
-    passport.authenticate(strategy, function (err, user, redirectURL) {
+    passport.authenticate(strategy, function(err, user, redirectURL) {
       if (err) {
-	return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
+        return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
       }
       if (!user) {
-	return res.redirect('/authentication/signin');
+        return res.redirect('/authentication/signin');
       }
-      req.login(user, function (err) {
-	if (err) {
-	  return res.redirect('/authentication/signin');
-	}
+      req.login(user, function(err) {
+        if (err) {
+          return res.redirect('/authentication/signin');
+        }
 
-	return res.redirect(redirectURL || sessionRedirectURL || '/');
+        return res.redirect(redirectURL || sessionRedirectURL || '/');
       });
     })(req, res, next);
   };
@@ -127,102 +128,102 @@ exports.oauthCallback = function (strategy) {
 /**
  * Helper function to save or update a OAuth user profile
  */
-exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
   if (!req.user) {
 
     //check if the email exists, add the provider data to it and login
     User.find({
       where: {
-	email: providerUserProfile.email
+        email: providerUserProfile.email
       }
-    }).then(function (user) {
+    }).then(function(user) {
       if (user) {
 
-	// Add the provider data to the additional provider data field
-	if (!user.additionalProvidersData) {
-	  user.additionalProvidersData = {};
-	}
+        // Add the provider data to the additional provider data field
+        if (!user.additionalProvidersData) {
+          user.additionalProvidersData = {};
+        }
 
-	user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+        user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
 
-	// Notify sequelize for update
-	user.set('additionalProvidersData', user.additionalProvidersData);
+        // Notify sequelize for update
+        user.set('additionalProvidersData', user.additionalProvidersData);
 
-	// And save the user
-	user.save().then(function () {
-	  req.login(user, function (err) {
-	    if (err)
-	      return done(new Error(err), user);
-	    return done(false, user);
-	  });
-	}).catch(function (err) {
-	  return done(new Error(err));
-	});
+        // And save the user
+        user.save().then(function() {
+          req.login(user, function(err) {
+            if (err)
+              return done(new Error(err), user);
+            return done(false, user);
+          });
+        }).catch(function(err) {
+          return done(new Error(err));
+        });
 
       } else {
-	//A new user...
-	//
-	// Define a search query fields
-	var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-	var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+        //A new user...
+        //
+        // Define a search query fields
+        var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+        var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
 
-	// Define main provider search query
-	var mainProviderSearchQuery = {};
-	mainProviderSearchQuery.provider = providerUserProfile.provider;
-	mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+        // Define main provider search query
+        var mainProviderSearchQuery = {};
+        mainProviderSearchQuery.provider = providerUserProfile.provider;
+        mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
-	// Define additional provider search query
-	var additionalProviderSearchQuery = {};
-	additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+        // Define additional provider search query
+        var additionalProviderSearchQuery = {};
+        additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
-	User.find({
-	  where: {
-	    $or: [mainProviderSearchQuery, additionalProviderSearchQuery],
-	  }
-	}).then(function (user) {
-	  if (user) { //The user already have the providerIdentifierField
-	    req.login(user, function (err) {
-	      if (err)
-		return done(new Error(err), user);
-	      return done(false, user);
-	    });
-	  } else {
+        User.find({
+          where: {
+            $or: [mainProviderSearchQuery, additionalProviderSearchQuery],
+          }
+        }).then(function(user) {
+          if (user) { //The user already have the providerIdentifierField
+            req.login(user, function(err) {
+              if (err)
+                return done(new Error(err), user);
+              return done(false, user);
+            });
+          } else {
 
-	    var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+            var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
-	    User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+            User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 
-	      var newUser = {};
+              var newUser = {};
 
-	      newUser.firstName = providerUserProfile.firstName;
-	      newUser.lastName = providerUserProfile.lastName;
-	      newUser.username = availableUsername;
-	      newUser.displayName = providerUserProfile.displayName;
-	      newUser.email = providerUserProfile.email;
-	      newUser.profileImageURL = providerUserProfile.profileImageURL;
-	      newUser.provider = providerUserProfile.provider;
-	      newUser.providerData = providerUserProfile.providerData;
+              newUser.firstName = providerUserProfile.firstName;
+              newUser.lastName = providerUserProfile.lastName;
+              newUser.username = availableUsername;
+              newUser.displayName = providerUserProfile.displayName;
+              newUser.email = providerUserProfile.email;
+              newUser.profileImageURL = providerUserProfile.profileImageURL;
+              newUser.provider = providerUserProfile.provider;
+              newUser.providerData = providerUserProfile.providerData;
 
-	      newUser.roles = ["user"];
+              newUser.roles = ["user"];
 
-	      User.create(newUser).then(function (user) {
-		if (!user) {
-		  return done(false, user);
-		} else {
-		  req.login(user, function (err) {
-		    if (err)
-		      return done(new Error(err), user);
-		    return done(false, user);
-		  });
-		}
-	      }).catch(function (err) {
-		return done(false, err);
-	      });
+              User.create(newUser).then(function(user) {
+                if (!user) {
+                  return done(false, user);
+                } else {
+                  req.login(user, function(err) {
+                    if (err)
+                      return done(new Error(err), user);
+                    return done(false, user);
+                  });
+                }
+              }).catch(function(err) {
+                return done(false, err);
+              });
 
-	    });
+            });
 
-	  }
-	});
+          }
+        });
 
       }
 
@@ -235,7 +236,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
     if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
       // Add the provider data to the additional provider data field
       if (!user.additionalProvidersData) {
-	user.additionalProvidersData = {};
+        user.additionalProvidersData = {};
       }
 
       user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
@@ -244,10 +245,10 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
       user.set('additionalProvidersData', user.additionalProvidersData);
 
       // And save the user
-      user.save().then(function (saved) {
-	return done((!saved) ? true : false, user, '/settings/accounts');
-      }).catch(function (error) {
-	return done(new Error(error), user);
+      user.save().then(function(saved) {
+        return done((!saved) ? true : false, user, '/settings/accounts');
+      }).catch(function(error) {
+        return done(new Error(error), user);
       });
 
     } else {
@@ -259,7 +260,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 /**
  * Remove OAuth provider
  */
-exports.removeOAuthProvider = function (req, res, next) {
+exports.removeOAuthProvider = function(req, res, next) {
   var user = req.user;
   var provider = req.query.provider;
 
@@ -279,15 +280,15 @@ exports.removeOAuthProvider = function (req, res, next) {
     user.set('additionalProvidersData', user.additionalProvidersData);
   }
 
-  user.save().then(function (user) {
-    req.login(user, function (err) {
+  user.save().then(function(user) {
+    req.login(user, function(err) {
       if (err) {
-	return res.status(400).send(err);
+        return res.status(400).send(err);
       } else {
-	return res.json(user);
+        return res.json(user);
       }
     });
-  }).catch(function (err) {
+  }).catch(function(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });

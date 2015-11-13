@@ -147,7 +147,7 @@ exports.reset = function(req, res, next) {
               user.save().then(function(saved) {
                 if (!saved) {
                   return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
+                    message: 'Unable to save the reset the password'
                   });
                 } else {
                   req.login(user, function(err) {

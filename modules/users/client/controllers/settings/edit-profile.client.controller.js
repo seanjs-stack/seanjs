@@ -8,7 +8,7 @@ angular.module('user').controller('EditProfileController', ['$scope', '$http', '
       User.get(function(data) {
         $scope.user = data;
       });
-    }
+    };
 
     // Update a user profile
     $scope.updateUserProfile = function(isValid) {

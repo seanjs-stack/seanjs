@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * User Model
  */
@@ -58,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     profileImageURL: DataTypes.STRING,
-    roles: (sequelize.options.dialect == 'postgres') ? DataTypes.JSON : DataTypes.STRING,
+    roles: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.STRING,
     hashedPassword: {
       type: DataTypes.STRING,
       default: '',
@@ -67,8 +69,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     provider: DataTypes.STRING,
-    providerData: (sequelize.options.dialect == 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
-    additionalProvidersData: (sequelize.options.dialect == 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
+    providerData: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
+    additionalProvidersData: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
     salt: DataTypes.STRING,
     facebookUserId: DataTypes.INTEGER,
     twitterUserId: DataTypes.INTEGER,

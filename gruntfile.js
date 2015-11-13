@@ -242,19 +242,19 @@ module.exports = function (grunt) {
     done();
   });
 
-  // Connect to the MongoDB instance and load the models
-  grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function () {
-    // Get the callback
-    var done = this.async();
-
-    // Use mongoose configuration
-    var mongoose = require('./config/lib/mongoose.js');
-
-    // Connect to database
-    mongoose.connect(function (db) {
-      done();
-    });
-  });
+  // // Connect to the MongoDB instance and load the models
+  // grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function () {
+  //   // Get the callback
+  //   var done = this.async();
+  //
+  //   // Use mongoose configuration
+  //   var mongoose = require('./config/lib/mongoose.js');
+  //
+  //   // Connect to database
+  //   mongoose.connect(function (db) {
+  //     done();
+  //   });
+  // });
 
   grunt.task.registerTask('server', 'Starting the server', function () {
     // Get the callback
