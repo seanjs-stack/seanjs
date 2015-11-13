@@ -96,7 +96,7 @@ module.exports.initMiddleware = function(app) {
 
   // Add multipart handling middleware
   app.use(multer({
-    dest: './uploads/',
+    dest: './public/uploads/users/profile/',
     inMemory: true
   }));
 };
