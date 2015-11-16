@@ -8,12 +8,6 @@ node_js:
 # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
-  - DIALECT=mysql
-  - DIALECT=postgres
-  - DIALECT=postgres-native
-  - DIALECT=sqlite
-  - DIALECT=mariadb
-  - DIALECT=mssql
 
 matrix:
   allow_failures:

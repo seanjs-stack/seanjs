@@ -6,6 +6,10 @@
 
 var crypto = require('crypto');
 
+Array.prototype.contains = function(element) {
+  return this.indexOf(element) > -1;
+};
+
 /**
  * A Validation function for local strategy properties
  */
@@ -30,7 +34,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: '',
       validate: {
-        isValid: validateLocalStrategyProperty
+        isValid: validateLocalStrategyProperty,
+        len: {
+          args: [1, 30],
+          msg: "First name title must be between 1 and 30 characters in length"
+        },
       }
     },
     lastName: {
@@ -60,7 +68,36 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     profileImageURL: DataTypes.STRING,
-    roles: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.STRING,
+    roles: {
+      type: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.STRING,
+      defaultValue: ["user"],
+      isArray: true,
+      validate: {
+        //len: [1, 99], // the array has to be at least three and max 99 elements long
+        isVaidRole: function(role) {
+          // if (!role) throw new Error("Role cannot be empty");
+          //
+          //
+          // var nrole = ['user', 'admin'];
+          // var validRoles = ['admin', 'user', 'guest'];
+          //
+          // if (nrole.length <= validRoles.length) {
+          //   if (nrole.length === 1 && validRoles.indexOf(nrole) < 0) {
+          //     throw new Error("Invalid roles 1");
+          //   } else if (nrole.length > 1 && !validRoles.contains(nrole)) {
+          //     throw new Error("Invalid roles 2");
+          //   } else if (nrole.length === validRoles.length && validRoles.sort().toString() !== nrole.sort().toString()) {
+          //     throw new Error("Invalid roles 2");
+          //   } else {
+          //     throw new Error("Invalid roles 3");
+          //   }
+          // } else {
+          //   throw new Error("Invalid roles 4");
+          // }
+
+        }
+      }
+    },
     hashedPassword: {
       type: DataTypes.STRING,
       default: '',
@@ -115,7 +152,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     associate: function(models) {
       if (models.article) {
-        User.hasMany(models.article);
+        User.hasMany(models.article, {
+          onDelete: 'cascade',
+          hooks: true
+        });
       }
     }
   });

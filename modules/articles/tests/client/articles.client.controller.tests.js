@@ -51,7 +51,7 @@
 
       // create mock article
       mockArticle = new Articles({
-        _id: '525a8422f6d0f87f0e407a33',
+        id: '525a8422f6d0f87f0e407a33',
         title: 'An Article about SEANJS',
         content: 'SEANJS rocks!'
       });
@@ -84,7 +84,7 @@
 
     it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
       // Set the URL parameter
-      $stateParams.articleId = mockArticle._id;
+      $stateParams.articleId = mockArticle.id;
 
       // Set GET response
       $httpBackend.expectGET(/api\/articles\/([0-9a-fA-F]{24})$/).respond(mockArticle);
@@ -127,7 +127,7 @@
         expect(scope.content).toEqual('');
 
         // Test URL redirection after the article was created
-        expect($location.path.calls.mostRecent().args[0]).toBe('articles/' + mockArticle._id);
+        expect($location.path.calls.mostRecent().args[0]).toBe('articles/' + mockArticle.id);
       }));
 
       it('should set scope.error if save error', function () {
@@ -158,7 +158,7 @@
         $httpBackend.flush();
 
         // Test URL location to new object
-        expect($location.path()).toBe('/articles/' + mockArticle._id);
+        expect($location.path()).toBe('/articles/' + mockArticle.id);
       }));
 
       it('should set scope.error to error response message', inject(function (Articles) {

@@ -19,7 +19,8 @@ var user, article;
  * Unit tests
  */
 describe('Article Model Unit Tests:', function() {
-  beforeEach(function(done) {
+
+  before(function(done) {
 
     user = User.build();
 
@@ -38,9 +39,15 @@ describe('Article Model Unit Tests:', function() {
         userId: user.id
       });
       done();
-    }).catch(function(err) {});
+    }).catch(function(err) {
+      console.log('err', err);
+    });
 
   });
+
+  // beforeEach(function(done) {
+  //   done();
+  // });
 
   describe('Method Save', function() {
     it('should be able to save without problems', function(done) {
@@ -55,7 +62,7 @@ describe('Article Model Unit Tests:', function() {
     it('should be able to show an error when try to save without title', function(done) {
       article.title = '';
 
-      return article.save().then(function(err) {
+      article.save().then(function(err) {
         should.exist(null);
         done();
       }).catch(function(err) {
@@ -66,11 +73,19 @@ describe('Article Model Unit Tests:', function() {
     });
   });
 
-  afterEach(function(done) {
-    //article.destroy().then(function() {
-      user.destroy().then(function() {
+  // afterEach(function(done) {
+  //   done();
+  // });
+
+  after(function(done) {
+    User.destroy({
+        where: {
+          email: 'test@test.com'
+        }
+      })
+      .then(function(success) {
         done();
       }).catch(function(err) {});
-    //}).catch(function(err) {});
   });
+
 });

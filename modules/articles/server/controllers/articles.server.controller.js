@@ -94,6 +94,13 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
+
+  if ((id % 1 === 0) === false) { //check if it's integer
+    return res.status(404).send({
+      message: 'Article is invalid'
+    });
+  }
+
   Article.find({
     where: {
       id: id
@@ -113,4 +120,5 @@ exports.articleByID = function(req, res, next, id) {
   }).catch(function(err) {
     return next(err);
   });
+
 };
