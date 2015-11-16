@@ -30,6 +30,37 @@ For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
 
 ### Installation
 
+
+##### Using Command Line:
+
+```bash
+$ git clone https://github.com/seanjs-stack/seanjs.git seanjs
+```
+```bash
+$ cd seanjs
+```
+
+```bash
+$ sudo npm install -g bower
+```
+
+```bash
+$ sudo npm install -g grunt-cli
+```
+
+```bash
+$ sudo npm install
+```
+You might notice some `errors` but if you hit `node server.js` and it's working, simple ignore them.
+
+```bash
+$ bower install --alow-root
+```
+
+```bash
+$ node server.js
+```
+
 ##### Using Yeoman Generator:
 
 ```sh
@@ -49,24 +80,6 @@ $ yo seanjs
 
 You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
 
-##### Using Command Line:
-
-```bash
-$ npm install -g bower
-```
-
-```bash
-$ npm install -g grunt-cli
-```
-
-```bash
-$ npm install
-```
-
-```bash
-$ bower install
-```
-You might need to add ` --alow-root` with the `bower install`
 
 ---
 
@@ -129,12 +142,10 @@ And to run only the client tests, run the test:client task:
 $ grunt test:client
 ```
 
-
-
 ---
 ## Contribution
 
-SOON...
+For now, contact contact@omarmassad.com and we'll discuss it!
 
 ---
 
