@@ -11,6 +11,7 @@ env:
 
 matrix:
   allow_failures:
+    - node_js: 4
     - node_js: 5
 services:
   - redis-server
