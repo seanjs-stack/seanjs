@@ -39,9 +39,7 @@ describe('Article Model Unit Tests:', function() {
         userId: user.id
       });
       done();
-    }).catch(function(err) {
-      console.log('err', err);
-    });
+    }).catch(function(err) {});
 
   });
 
@@ -77,6 +75,7 @@ describe('Article Model Unit Tests:', function() {
   //   done();
   // });
 
+  // TODO FIX
   after(function(done) {
     User.destroy({
         where: {

@@ -47,7 +47,8 @@ describe('Article CRUD tests', function() {
     user.roles = ['admin', 'user'];
 
     // Save a user to the test db and create new article
-    user.save().then(function() {
+    user.save().then(function(saved) {
+      article = Article.build();
       article = {
         title: 'Article Title',
         content: 'Article Content',
@@ -55,6 +56,7 @@ describe('Article CRUD tests', function() {
       };
       done();
     }).catch(function(err) {});
+
   });
 
   it('should be able to save an article if logged in', function(done) {
@@ -63,10 +65,8 @@ describe('Article CRUD tests', function() {
       .expect(200)
       .end(function(signinErr, signinRes) {
 
-
         // Handle signin error
         if (signinErr) {
-          console.log('signinErr', signinErr);
           return done(signinErr);
         }
 
@@ -81,7 +81,6 @@ describe('Article CRUD tests', function() {
 
             // Handle article save error
             if (articleSaveErr) {
-              console.log('articleSaveErr', articleSaveErr);
               return done(articleSaveErr);
             }
 
@@ -91,7 +90,6 @@ describe('Article CRUD tests', function() {
 
                 // Handle article save error
                 if (articlesGetErr) {
-                  console.log('articlesGetErr', articlesGetErr);
                   return done(articlesGetErr);
                 }
 
@@ -140,7 +138,6 @@ describe('Article CRUD tests', function() {
 
         // Handle signin error
         if (signinErr) {
-          console.log('signinErr', signinErr);
           return done(signinErr);
         }
 
@@ -227,9 +224,7 @@ describe('Article CRUD tests', function() {
           done();
         });
 
-    }).catch(function(err) {
-      console.log('err', err);
-    });
+    }).catch(function(err) {});
   });
 
   it('should be able to get a single article if not signed in', function(done) {
@@ -296,7 +291,6 @@ describe('Article CRUD tests', function() {
 
             // Handle article save error
             if (articleSaveErr) {
-              console.log('articleSaveErr', articleSaveErr);
               return done(articleSaveErr);
             }
 
@@ -308,11 +302,8 @@ describe('Article CRUD tests', function() {
 
                 // Handle article error error
                 if (articleDeleteErr) {
-                  console.log('articleDeleteErr', articleDeleteErr);
                   return done(articleDeleteErr);
                 }
-
-                console.log('articleDeleteRes.body.id', articleDeleteRes.body.id);
 
                 // Set assertions
                 (articleDeleteRes.body.id).should.equal(articleSaveRes.body.id);
@@ -356,9 +347,7 @@ describe('Article CRUD tests', function() {
   //     })
   //     .then(function(success) {
   //       done();
-  //     }).catch(function(err) {
-  //       console.log('step 1 user err', err);
-  //     });
+  //     }).catch(function(err) {});
   // });
 
   after(function(done) {

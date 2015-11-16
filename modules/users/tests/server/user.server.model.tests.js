@@ -185,12 +185,8 @@ describe('User Model Unit Tests:', function() {
             should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
             done();
           }).catch(function(err) {});
-        }).catch(function(err) {
-          console.log('err1', err);
-        });
-      }).catch(function(err) {
-        console.log('err2', err);
-      });
+        }).catch(function(err) {});
+      }).catch(function(err) {});
 
     });
 
