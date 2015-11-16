@@ -30,6 +30,11 @@ For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
 
 ### Installation
 
+### Before you start, make sure you have these installed:
+ * PostgreSQL 9.4 or MySQL, MariaDB, SQLite and MSSQL *(Depending on your project but SEAN.JS defaults to **PostgreSQL 9.4**)*
+ * Redis Server
+ * Node.js
+ * NPM
 
 ##### Using Command Line:
 
