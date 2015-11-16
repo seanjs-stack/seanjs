@@ -41,9 +41,9 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 after_script:
-  - "mysql -e 'create database "seanjs-dev";'"
-  - "psql -c 'create database "seanjs-dev";' -U postgres"
-  - "psql "seanjs-dev" -c 'create extension postgis;' -U postgres"
+  - "mysql -e 'create database seanjs_dev;'"
+  - "psql -c 'create database seanjs_dev;' -U postgres"
+  - "psql seanjs_dev -c 'create extension postgis;' -U postgres"
   - nsp audit-package
   - grunt coverage
 notifications:

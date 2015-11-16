@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
    db: {
-      name: "seanjs-dev",
+      name: "seanjs_dev",
       host: "localhost",
       port: 5432,
       username: "postgres",

@@ -8,7 +8,7 @@ module.exports = {
   },
   port: process.env.PORT || 8443,
   db: {
-    name: "seanjs-dev",
+    name: "seanjs_dev",
     host: "localhost",
     port: 5432,
     username: "postgres",
