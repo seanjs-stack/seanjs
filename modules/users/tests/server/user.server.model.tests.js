@@ -222,367 +222,366 @@ describe('User Model Unit Tests:', function() {
     // });
 
   });
-/* TODO
-  describe("User Password Validation Tests", function() {
-    it('should validate when the password strength passes - "P@$$w0rd!!"', function() {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('P@$$w0rd!!', user1.salt);
+  /* TODO
+    describe("User Password Validation Tests", function() {
+      it('should validate when the password strength passes - "P@$$w0rd!!"', function() {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('P@$$w0rd!!', user1.salt);
 
-      user1.validate().success(function(err) {
-        should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-      }).catch(function(err) {});
-    });
-
-    it('should validate when the password is undefined', function() {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword(undefined, user1.salt);
-
-      user1.validate().success(function(err) {
-        should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-      }).catch(function(err) {});
-    });
-
-    it('should validate when the passphrase strength passes - "Open-Source Full-Stack Solution For SEANJS Applications"', function() {
-      var password = 'Open-Source Full-Stack Solution For SEANJS Applications';
-
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword(password, user1.salt);
-
-      user1.validate().success(function(err) {
-        should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-      }).catch(function(err) {});
-    });
-
-    it('should not allow a less than 10 characters long - "P@$$w0rd!"', function(done) {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('P@$$w0rd!', user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password must be at least 10 characters long.");
-        done();
-      }).catch(function(err) {});
-    });
-
-    it('should not allow a greater than 128 characters long.', function(done) {
-      var password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
-
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword(password, user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password must be fewer than 128 characters.");
-        done();
-      }).catch(function(err) {});
-    });
-
-    it('should not allow more than 3 or more repeating characters - "P@$$w0rd!!!"', function(done) {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('P@$$w0rd!!!', user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password may not contain sequences of three or more repeated characters.");
-        done();
-      }).catch(function(err) {});
-    });
-
-    it('should not allow a password with no uppercase letters - "p@$$w0rd!!"', function(done) {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('p@$$w0rd!!', user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password must contain at least one uppercase letter.");
-        done();
-      }).catch(function(err) {});
-    });
-
-    it('should not allow a password with less than one number - "P@$$word!!"', function(done) {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('P@$$word!!', user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password must contain at least one number.");
-        done();
-      }).catch(function(err) {});
-    });
-
-    it('should not allow a password with less than one special character - "Passw0rdss"', function(done) {
-      user1.salt = user1.makeSalt();
-      user1.hashedPassword = user1.encryptPassword('Passw0rdss', user1.salt);
-
-      user1.validate().success(function(err) {
-        err.errors.password.message.should.equal("The password must contain at least one special character.");
-        done();
-      }).catch(function(err) {});
-    });
-  });
-*/
-/* TODO
-  describe("User E-mail Validation Tests", function() {
-    it('should not allow invalid email address - "123"', function(done) {
-      user1.email = '123';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow invalid email address - "123@123"', function(done) {
-      user1.email = '123@123';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow invalid email address - "123.com"', function(done) {
-      user1.email = '123.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow invalid email address - "@123.com"', function(done) {
-      user1.email = '@123.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow invalid email address - "abc@abc@abc.com"', function(done) {
-      user1.email = 'abc@abc@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow invalid characters in email address - "abc~@#$%^&*()ef=@abc.com"', function(done) {
-      user1.email = 'abc~@#$%^&*()ef=@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow space characters in email address - "abc def@abc.com"', function(done) {
-      user1.email = 'abc def@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow doudble quote characters in email address - "abc\"def@abc.com"', function(done) {
-      user1.email = 'abc\"def@abc.com';
-      user1.save().then(function(err) {
-        if (err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should not allow double dotted characters in email address - "abcdef@abc..com"', function(done) {
-      user1.email = 'abcdef@abc..com';
-      user1.save().then(function(err) {
-        if (err) {
-          user1.destroy().then(function(err_remove) {
-            should.exist((err) ? null : err);
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
-          should.exist((err) ? null : err);
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should allow single quote characters in email address - "abc\'def@abc.com"', function(done) {
-      user1.email = "abc\'def@abc.com";
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
+        user1.validate().success(function(err) {
           should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-          done();
-        }
-      }).catch(function(err) {});
+        }).catch(function(err) {});
+      });
 
-    });
+      it('should validate when the password is undefined', function() {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword(undefined, user1.salt);
 
-    it('should allow valid email address - "abc@abc.com"', function(done) {
-      user1.email = 'abc@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
+        user1.validate().success(function(err) {
           should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-          done();
-        }
-      }).catch(function(err) {});
+        }).catch(function(err) {});
+      });
 
-    });
+      it('should validate when the passphrase strength passes - "Open-Source Full-Stack Solution For SEANJS Applications"', function() {
+        var password = 'Open-Source Full-Stack Solution For SEANJS Applications';
 
-    it('should allow valid email address - "abc+def@abc.com"', function(done) {
-      user1.email = 'abc+def@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-            should.not.exist(err_remove);
-            done();
-          }).catch(function(err) {});
-        } else {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword(password, user1.salt);
+
+        user1.validate().success(function(err) {
           should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+        }).catch(function(err) {});
+      });
+
+      it('should not allow a less than 10 characters long - "P@$$w0rd!"', function(done) {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('P@$$w0rd!', user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password must be at least 10 characters long.");
           done();
-        }
-      }).catch(function(err) {});
+        }).catch(function(err) {});
+      });
 
+      it('should not allow a greater than 128 characters long.', function(done) {
+        var password = ')!/uLT="lh&:`6X!]|15o!$!TJf,.13l?vG].-j],lFPe/QhwN#{Z<[*1nX@n1^?WW-%_.*D)m$toB+N7z}kcN#B_d(f41h%w@0F!]igtSQ1gl~6sEV&r~}~1ub>If1c+';
+
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword(password, user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password must be fewer than 128 characters.");
+          done();
+        }).catch(function(err) {});
+      });
+
+      it('should not allow more than 3 or more repeating characters - "P@$$w0rd!!!"', function(done) {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('P@$$w0rd!!!', user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password may not contain sequences of three or more repeated characters.");
+          done();
+        }).catch(function(err) {});
+      });
+
+      it('should not allow a password with no uppercase letters - "p@$$w0rd!!"', function(done) {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('p@$$w0rd!!', user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password must contain at least one uppercase letter.");
+          done();
+        }).catch(function(err) {});
+      });
+
+      it('should not allow a password with less than one number - "P@$$word!!"', function(done) {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('P@$$word!!', user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password must contain at least one number.");
+          done();
+        }).catch(function(err) {});
+      });
+
+      it('should not allow a password with less than one special character - "Passw0rdss"', function(done) {
+        user1.salt = user1.makeSalt();
+        user1.hashedPassword = user1.encryptPassword('Passw0rdss', user1.salt);
+
+        user1.validate().success(function(err) {
+          err.errors.password.message.should.equal("The password must contain at least one special character.");
+          done();
+        }).catch(function(err) {});
+      });
     });
+  */
+  /* TODO
+    describe("User E-mail Validation Tests", function() {
+      it('should not allow invalid email address - "123"', function(done) {
+        user1.email = '123';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
 
-    it('should allow valid email address - "abc.def@abc.com"', function(done) {
-      user1.email = 'abc.def@abc.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
+      });
+
+      it('should not allow invalid email address - "123@123"', function(done) {
+        user1.email = '123@123';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow invalid email address - "123.com"', function(done) {
+        user1.email = '123.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow invalid email address - "@123.com"', function(done) {
+        user1.email = '@123.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow invalid email address - "abc@abc@abc.com"', function(done) {
+        user1.email = 'abc@abc@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow invalid characters in email address - "abc~@#$%^&*()ef=@abc.com"', function(done) {
+        user1.email = 'abc~@#$%^&*()ef=@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow space characters in email address - "abc def@abc.com"', function(done) {
+        user1.email = 'abc def@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow doudble quote characters in email address - "abc\"def@abc.com"', function(done) {
+        user1.email = 'abc\"def@abc.com';
+        user1.save().then(function(err) {
+          if (err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should not allow double dotted characters in email address - "abcdef@abc..com"', function(done) {
+        user1.email = 'abcdef@abc..com';
+        user1.save().then(function(err) {
+          if (err) {
+            user1.destroy().then(function(err_remove) {
+              should.exist((err) ? null : err);
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.exist((err) ? null : err);
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should allow single quote characters in email address - "abc\'def@abc.com"', function(done) {
+        user1.email = "abc\'def@abc.com";
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
             should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-            should.not.exist(err_remove);
             done();
-          }).catch(function(err) {});
-        } else {
-          should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-          done();
-        }
-      }).catch(function(err) {});
+          }
+        }).catch(function(err) {});
 
-    });
+      });
 
-    it('should allow valid email address - "abc.def@abc.def.com"', function(done) {
-      user1.email = 'abc.def@abc.def.com';
-      user1.save().then(function(err) {
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
+      it('should allow valid email address - "abc@abc.com"', function(done) {
+        user1.email = 'abc@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
             should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-            should.not.exist(err_remove);
             done();
-          }).catch(function(err) {});
-        } else {
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should allow valid email address - "abc+def@abc.com"', function(done) {
+        user1.email = 'abc+def@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should allow valid email address - "abc.def@abc.com"', function(done) {
+        user1.email = 'abc.def@abc.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should allow valid email address - "abc.def@abc.def.com"', function(done) {
+        user1.email = 'abc.def@abc.def.com';
+        user1.save().then(function(err) {
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
+            should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
+            done();
+          }
+        }).catch(function(err) {});
+
+      });
+
+      it('should allow valid email address - "abc-def@abc.com"', function(done) {
+        user1.email = 'abc-def@abc.com';
+        user1.save().then(function(err) {
           should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-          done();
-        }
-      }).catch(function(err) {});
-
-    });
-
-    it('should allow valid email address - "abc-def@abc.com"', function(done) {
-      user1.email = 'abc-def@abc.com';
-      user1.save().then(function(err) {
-        should.not.exist((err) ? null : errorHandler.getErrorMessage(err));
-        if (!err) {
-          user1.destroy().then(function(err_remove) {
-            should.not.exist(err_remove);
+          if (!err) {
+            user1.destroy().then(function(err_remove) {
+              should.not.exist(err_remove);
+              done();
+            }).catch(function(err) {});
+          } else {
             done();
-          }).catch(function(err) {});
-        } else {
-          done();
-        }
-      }).catch(function(err) {});
+          }
+        }).catch(function(err) {});
+
+      });
 
     });
-
-  });
-*/
+  */
   after(function(done) {
     user1.destroy().then(function() {
-      done();
+      user2.destroy().then(function() {
+        done();
+      }).catch(function(err) {});
     }).catch(function(err) {});
-    user2.destroy().then(function() {
-      done();
-    }).catch(function(err) {});
-    user3.destroy().then(function() {
-      done();
-    }).catch(function(err) {});
+    // user3.destroy().then(function() {
+    //   done();
+    // }).catch(function(err) {});
   });
 });

@@ -95,10 +95,24 @@ module.exports.initMiddleware = function(app) {
   app.use(flash());
 
   // Add multipart handling middleware
-  app.use(multer({
-    dest: './public/uploads/users/profile/',
-    inMemory: true
-  }));
+  var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, './public/uploads/users/profile');
+    },
+    filename: function(req, file, cb) {
+      var getFileExt = function(fileName) {
+        var fileExt = fileName.split(".");
+        if (fileExt.length === 1 || (fileExt[0] === "" && fileExt.length === 2)) {
+          return "";
+        }
+        return fileExt.pop();
+      };
+      cb(null, Date.now() + '.' + getFileExt(file.originalname));
+    }
+  });
+
+  app.use(multer({storage: storage}).single('file'));
+
 };
 
 /**
