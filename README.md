@@ -51,7 +51,7 @@ $ sudo npm install -g grunt-cli
 ```bash
 $ sudo npm install
 ```
-You might notice some `errors` but if you hit `node server.js` and it's working, simple ignore them.
+You might notice some `errors` but if you hit `node server.js` and it's working, simply ignore them.
 
 ```bash
 $ bower install --alow-root
