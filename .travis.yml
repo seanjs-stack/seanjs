@@ -5,6 +5,8 @@ node_js:
   - 0.12
   - 4
   - 5
+  - "iojs-v1"
+  - "iojs-v2"
 # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
@@ -13,6 +15,9 @@ matrix:
   allow_failures:
     - node_js: 4
     - node_js: 5
+    - node_js: "iojs-v1"
+    - node_js: "iojs-v2"
+
 services:
   - redis-server
 # gcc 4.8 requires ubuntu-toolchain-r-test
