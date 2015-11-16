@@ -2,6 +2,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/seanjs/badge/?version=latest)](http://seanjs.readthedocs.org/en/latest/?badge=latest)
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/seanjs-stack/seanjs.svg)](https://travis-ci.org/seanjs-stack/seanjs)
 
 [![NPM](https://nodei.co/npm/generator-seanjs.png?downloads=true)](https://nodei.co/npm/generator-seanjs/)
 
