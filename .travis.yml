@@ -31,6 +31,9 @@ addons:
     - gcc-4.8
     - clang
 before_install:
+  - "mysql -e 'create database seanjs_dev;'"
+  - "psql -c 'create database seanjs_dev;' -U postgres"
+  - "psql seanjs_dev -c 'create extension postgis;' -U postgres"
   - gem update --system
   - gem install sass --version "=3.3.7"
   - npm i nsp -g
@@ -41,9 +44,6 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 after_script:
-  - "mysql -e 'create database seanjs_dev;'"
-  - "psql -c 'create database seanjs_dev;' -U postgres"
-  - "psql seanjs_dev -c 'create extension postgis;' -U postgres"
   - nsp audit-package
   - grunt coverage
 notifications:
