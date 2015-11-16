@@ -21,7 +21,6 @@ var user, article;
 describe('Article Model Unit Tests:', function() {
 
   before(function(done) {
-
     user = User.build();
 
     user.firstName = 'Full';
@@ -32,7 +31,8 @@ describe('Article Model Unit Tests:', function() {
     user.salt = user.makeSalt();
     user.hashedPassword = user.encryptPassword('S3@n.jsI$Aw3$0m3', user.salt);
 
-    user.save().then(function() {
+
+    user.save().then(function(user) {
       article = Article.build({
         title: 'Article Title',
         content: 'Article Content',
@@ -40,7 +40,7 @@ describe('Article Model Unit Tests:', function() {
       });
       done();
     }).catch(function(err) {});
-
+    
   });
 
   // beforeEach(function(done) {

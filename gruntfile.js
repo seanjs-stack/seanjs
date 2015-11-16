@@ -9,7 +9,7 @@ var _ = require('lodash'),
   fs = require('fs'),
   path = require('path');
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   // Project Configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -139,10 +139,10 @@ module.exports = function (grunt) {
           expand: true,
           src: defaultAssets.client.sass,
           ext: '.css',
-          rename: function (base, src) {
+          rename: function(base, src) {
             return src.replace('/scss/', '/css/');
           }
-				}]
+        }]
       }
     },
     less: {
@@ -151,10 +151,10 @@ module.exports = function (grunt) {
           expand: true,
           src: defaultAssets.client.less,
           ext: '.css',
-          rename: function (base, src) {
+          rename: function(base, src) {
             return src.replace('/less/', '/css/');
           }
-				}]
+        }]
       }
     },
     'node-inspector': {
@@ -184,7 +184,7 @@ module.exports = function (grunt) {
           coverage: true,
           require: 'test.js',
           coverageFolder: 'coverage',
-          reportFormats: ['cobertura','lcovonly'],
+          reportFormats: ['cobertura', 'lcovonly'],
           check: {
             lines: 40,
             statements: 40
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
       localConfig: {
         src: 'config/env/local.example.js',
         dest: 'config/env/local.js',
-        filter: function () {
+        filter: function() {
           return !fs.existsSync('config/env/local.js');
         }
       }
@@ -233,7 +233,7 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Make sure upload directory exists
-  grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function () {
+  grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function() {
     // Get the callback
     var done = this.async();
 
@@ -242,28 +242,18 @@ module.exports = function (grunt) {
     done();
   });
 
-  // // Connect to the MongoDB instance and load the models
-  // grunt.task.registerTask('mongoose', 'Task that connects to the MongoDB instance and loads the application models.', function () {
-  //   // Get the callback
-  //   var done = this.async();
-  //
-  //   // Use mongoose configuration
-  //   var mongoose = require('./config/lib/mongoose.js');
-  //
-  //   // Connect to database
-  //   mongoose.connect(function (db) {
-  //     done();
-  //   });
-  // });
 
-  grunt.task.registerTask('server', 'Starting the server', function () {
+  grunt.task.registerTask('server', 'Starting the server', function() {
     // Get the callback
     var done = this.async();
 
     var path = require('path');
     var app = require(path.resolve('./config/lib/app'));
-    var server = app.start(function () {
-      done();
+    var server = app.start(function() {
+      setTimeout(function() { //for sequelize.sync()
+        done();
+      }, 10000);
+
     });
   });
 

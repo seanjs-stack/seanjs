@@ -39,7 +39,7 @@ db.connect = function(database, username, password, options) {
     }
   });
 
-  // Synchronizing any model changes with database. 
+  // Synchronizing any model changes with database.
   // WARNING: this will DROP your database everytime you re-run your application
   sequelize.sync()
     .then(function() {
