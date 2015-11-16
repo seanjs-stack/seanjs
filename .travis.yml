@@ -8,14 +8,21 @@ node_js:
 # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
+  - DIALECT=mysql
+  - DIALECT=postgres
+  - DIALECT=postgres-native
+  - DIALECT=sqlite
+  - DIALECT=mariadb
+  - DIALECT=mssql
+
 matrix:
   allow_failures:
     - node_js: 5
 services:
-  - postgresql
   - redis-server
 # gcc 4.8 requires ubuntu-toolchain-r-test
 addons:
+  postgresql: "9.4"
   apt:
     sources:
     - ubuntu-toolchain-r-test
@@ -34,6 +41,9 @@ before_install:
   - 'node_modules/protractor/bin/webdriver-manager start 2>&1 &'
   - sleep 3
 after_script:
+  - "mysql -e 'create database "seanjs-dev";'"
+  - "psql -c 'create database "seanjs-dev";' -U postgres"
+  - "psql "seanjs-dev" -c 'create extension postgis;' -U postgres"
   - nsp audit-package
   - grunt coverage
 notifications:
