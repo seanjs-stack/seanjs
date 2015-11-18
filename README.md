@@ -156,8 +156,9 @@ This needs your votes! [UserVoice - Add SEAN.JS to One-Click Apps](https://digit
 ---
 ## Contribution
 
-For now, contact contact@omarmassad.com and we'll discuss it!
+You are welcome to contribute to SEAN.JS Stack to keep it up to date and always improving!
 
+Please check the [Contribution Info](https://github.com/seanjs-stack/seanjs/blob/master/CONTRIBUTING.md)
 ---
 
 ## Credits
