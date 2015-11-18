@@ -40,7 +40,7 @@ describe('Article Model Unit Tests:', function() {
       });
       done();
     }).catch(function(err) {});
-    
+
   });
 
   // beforeEach(function(done) {
