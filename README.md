@@ -148,6 +148,10 @@ And to run only the client tests, run the test:client task:
 ```bash
 $ grunt test:client
 ```
+---
+## DigitalOcean - One-Click Apps
+
+This needs your votes! [UserVoice - Add SEAN.JS to One-Click Apps](https://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/10749723-add-sean-js-to-one-click-apps)
 
 ---
 ## Contribution

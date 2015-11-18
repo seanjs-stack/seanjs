@@ -15,6 +15,7 @@ app/tests/coverage/
 .bower-*/
 .idea/
 coverage/
+npm-debug.log
 
 # SEAN.JS app and assets
 # ======================
@@ -62,8 +63,6 @@ local.properties
 # Cloud9 IDE
 # =========
 .c9/
-data/
-mongod
 
 # Visual Studio
 # =========
