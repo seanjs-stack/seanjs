@@ -4,14 +4,14 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
    db: {
-      name: "seanjs_dev",
-      host: "localhost",
+      name: "dfuue4lro8u0qk",
+      host: "ec2-54-217-240-205.eu-west-1.compute.amazonaws.com",
       port: 5432,
-      username: "postgres",
-      password: "postgres",
+      username: "xjwecgnyhogzdw",
+      password: "iH1awetnARl9-HltdMqMWuF0dN",
       dialect: "postgres",
       enableSequelizeLog: false,
-      ssl: false
+      ssl: true,
    },
    log: {
       // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
@@ -26,9 +26,9 @@ module.exports = {
       title: defaultEnvConfig.app.title + ' - Development Environment'
    },
    facebook: {
-      clientID: process.env.FACEBOOK_ID || 'APP_ID',
-      clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
-      callbackURL: '/api/auth/facebook/callback'
+     clientID: process.env.FACEBOOK_ID || 'APP_ID',
+     clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+     callbackURL: '/api/auth/facebook/callback'
    },
    twitter: {
       clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',

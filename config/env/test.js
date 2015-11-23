@@ -10,7 +10,8 @@ module.exports = {
       username: "postgres",
       password: "postgres",
       dialect: "postgres", //mysql, postgres, sqlite3,...
-      enableSequelizeLog: false
+      enableSequelizeLog: false,
+      ssl: false
    },
    port: process.env.PORT || 3001,
    app: {

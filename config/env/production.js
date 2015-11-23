@@ -14,7 +14,8 @@ module.exports = {
     username: "postgres",
     password: "postgres",
     dialect: "postgres", //mysql, postgres, sqlite3,...
-    enableSequelizeLog: false
+    enableSequelizeLog: false,
+    ssl: false
   },
   log: {
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
