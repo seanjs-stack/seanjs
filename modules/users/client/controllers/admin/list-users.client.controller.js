@@ -1,21 +1,21 @@
 'use strict';
 
 angular.module('user.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
-  function ($scope, $filter, Admin) {
-    
-    Admin.query(function (data) {
+  function($scope, $filter, Admin) {
+
+    Admin.query(function(data) {
       $scope.users = data;
       $scope.buildPager();
     });
 
-    $scope.buildPager = function () {
+    $scope.buildPager = function() {
       $scope.pagedItems = [];
       $scope.itemsPerPage = 15;
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
 
-    $scope.figureOutItemsToDisplay = function () {
+    $scope.figureOutItemsToDisplay = function() {
       $scope.filteredItems = $filter('filter')($scope.users, {
         $: $scope.search
       });
@@ -25,7 +25,7 @@ angular.module('user.admin').controller('UserListController', ['$scope', '$filte
       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
     };
 
-    $scope.pageChanged = function () {
+    $scope.pageChanged = function() {
       $scope.figureOutItemsToDisplay();
     };
   }

@@ -2,7 +2,7 @@
 
 // Setting up route
 angular.module('user').config(['$stateProvider',
-  function ($stateProvider) {
+  function($stateProvider) {
     // User state routing
     $stateProvider
       .state('settings', {

@@ -41,7 +41,7 @@ exports.signup = function(req, res) {
   user.save().then(function() {
     req.login(user, function(err) {
       if (err)
-        //return next(err);
+      //return next(err);
         res.status(400).send(err);
       res.json(user);
     });

@@ -2,9 +2,9 @@
 
 // Create the Socket.io wrapper service
 angular.module('core').service('Socket', ['Authentication', '$state', '$timeout',
-  function (Authentication, $state, $timeout) {
+  function(Authentication, $state, $timeout) {
     // Connect to Socket.io server
-    this.connect = function () {
+    this.connect = function() {
       // Connect only when authenticated
       if (Authentication.user) {
         this.socket = io();
@@ -13,10 +13,10 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
     this.connect();
 
     // Wrap the Socket.io 'on' method
-    this.on = function (eventName, callback) {
+    this.on = function(eventName, callback) {
       if (this.socket) {
-        this.socket.on(eventName, function (data) {
-          $timeout(function () {
+        this.socket.on(eventName, function(data) {
+          $timeout(function() {
             callback(data);
           });
         });
@@ -24,14 +24,14 @@ angular.module('core').service('Socket', ['Authentication', '$state', '$timeout'
     };
 
     // Wrap the Socket.io 'emit' method
-    this.emit = function (eventName, data) {
+    this.emit = function(eventName, data) {
       if (this.socket) {
         this.socket.emit(eventName, data);
       }
     };
 
     // Wrap the Socket.io 'removeListener' method
-    this.removeListener = function (eventName) {
+    this.removeListener = function(eventName) {
       if (this.socket) {
         this.socket.removeListener(eventName);
       }

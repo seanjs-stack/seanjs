@@ -16,7 +16,10 @@ module.exports = function(sequelize, DataTypes) {
     content: DataTypes.TEXT
   }, {
     associate: function(models) {
-      Article.belongsTo(models.user, {onDelete: 'cascade', hooks: true});
+      Article.belongsTo(models.user, {
+        onDelete: 'cascade',
+        hooks: true
+      });
     }
   });
   return Article;

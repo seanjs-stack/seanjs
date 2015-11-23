@@ -5,18 +5,27 @@ angular.module('user')
     return {
       require: 'ngModel',
       link: function(scope, element, attrs, modelCtrl) {
-        modelCtrl.$parsers.unshift(function (password) {
+        modelCtrl.$parsers.unshift(function(password) {
           var result = PasswordValidator.getResult(password);
           var strengthIdx = 0;
 
           // Strength Meter - visual indicator for users
-          var strengthMeter = [
-            { color: "danger", progress: "20" },
-            { color: "warning", progress: "40"},
-            { color: "info", progress: "60"},
-            { color: "primary", progress: "80"},
-            { color: "success", progress: "100"}
-          ];
+          var strengthMeter = [{
+            color: "danger",
+            progress: "20"
+          }, {
+            color: "warning",
+            progress: "40"
+          }, {
+            color: "info",
+            progress: "60"
+          }, {
+            color: "primary",
+            progress: "80"
+          }, {
+            color: "success",
+            progress: "100"
+          }];
           var strengthMax = strengthMeter.length;
 
           if (result.errors.length < strengthMeter.length) {
@@ -39,4 +48,4 @@ angular.module('user')
         });
       }
     };
-}]);
+  }]);

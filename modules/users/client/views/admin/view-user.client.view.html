@@ -1,64 +1,65 @@
 <section>
-  <br /><br />
+  <br />
+  <br />
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
       <table class="table table-striped">
-	<thead>
-	  <tr>
-	    <th colspan="2">Viewing {{user.username}}</th>
-	  </tr>
-	</thead>
-	<tbody>
-	  <tr>
-	    <th>First name</th>
-	    <td ng-bind="user.firstName"></td>
-	  </tr>
-	  <tr>
-	    <th>Last name</th>
-	    <td ng-bind="user.lastName"></td>
-	  </tr>
-	  <tr>
-	    <th>Display name</th>
-	    <td ng-bind="user.displayName"></td>
-	  </tr>
-	  <tr>
-	    <th>Username</th>
-	    <td ng-bind="user.username"></td>
-	  </tr>
-	  <tr>
-	    <th>Email</th>
-	    <td ng-bind="user.email"></td>
-	  </tr>
-	  <tr>
-	    <th>Provider</th>
-	    <td ng-bind="user.provider"></td>
-	  </tr>
-	  <tr>
-	    <th>Roles</th>
-	    <td ng-bind="user.roles"></td>
-	  </tr>
-	  <tr>
-	    <th>Date Updated</th>
-	    <td ng-bind="user.updatedAt"></td>
-	  </tr>
-	  <tr>
-	    <th>Date Created</th>
-	    <td ng-bind="user.createdAt"></td>
-	  </tr>
-	</tbody>
-	<tfoot>
-	  <tr>
-	    <td colspan="2" align="center">
-	      <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user.id})">
+        <thead>
+          <tr>
+            <th colspan="2">Viewing {{user.username}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>First name</th>
+            <td ng-bind="user.firstName"></td>
+          </tr>
+          <tr>
+            <th>Last name</th>
+            <td ng-bind="user.lastName"></td>
+          </tr>
+          <tr>
+            <th>Display name</th>
+            <td ng-bind="user.displayName"></td>
+          </tr>
+          <tr>
+            <th>Username</th>
+            <td ng-bind="user.username"></td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td ng-bind="user.email"></td>
+          </tr>
+          <tr>
+            <th>Provider</th>
+            <td ng-bind="user.provider"></td>
+          </tr>
+          <tr>
+            <th>Roles</th>
+            <td ng-bind="user.roles"></td>
+          </tr>
+          <tr>
+            <th>Date Updated</th>
+            <td ng-bind="user.updatedAt"></td>
+          </tr>
+          <tr>
+            <th>Date Created</th>
+            <td ng-bind="user.createdAt"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" align="center">
+              <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user.id})">
 		Edit <i class="glyphicon glyphicon-edit"></i>
 	      </a>
-	      <a class="btn btn-danger" ng-click="remove(user);" ng-if="authentication.user.id == user.id || (authentication.user.roles.indexOf('admin') && authentication.user.roles.indexOf('admin') != -1)">
+              <a class="btn btn-danger" ng-click="remove(user);" ng-if="authentication.user.id == user.id || (authentication.user.roles.indexOf('admin') && authentication.user.roles.indexOf('admin') != -1)">
 		Delete <i class="glyphicon glyphicon-trash"></i>
 	      </a>
-	    </td>
-	  </tr>
-	</tfoot>
+            </td>
+          </tr>
+        </tfoot>
       </table>
 
 

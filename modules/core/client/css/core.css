@@ -1,7 +1,7 @@
-.seanjs{
+.seanjs {
   color: #682929;
 }
-.seanjs-capital{
+.seanjs-capital {
   font-weight: bold;
   color: #9B3532;
 }
@@ -11,11 +11,7 @@
 .undecorated-link:hover {
   text-decoration: none;
 }
-[ng\:cloak],
-[ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak {
+[ng\:cloak], [ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 .header-profile-image {
@@ -30,9 +26,7 @@
   width: 28px;
   margin-right: 5px;
 }
-
-.open .header-profile-image,
-a:hover .header-profile-image {
+.open .header-profile-image, a:hover .header-profile-image {
   opacity: 1;
 }
 .user-header-dropdown-toggle {
@@ -48,79 +42,78 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
 /* navbar */
+
 .navbar-seanjs {
-    background-color: #2B313D;
-    border-color: #E7E7E7;
+  background-color: #2B313D;
+  border-color: #E7E7E7;
 }
+
 /* title */
+
 .navbar-seanjs .navbar-brand {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
-.navbar-seanjs .navbar-brand:hover,
-.navbar-seanjs .navbar-brand:focus {
-    color: #fff;
+.navbar-seanjs .navbar-brand:hover, .navbar-seanjs .navbar-brand:focus {
+  color: #fff;
 }
+
 /* link */
+
 .navbar-seanjs .navbar-nav > li > a {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
-.navbar-seanjs .navbar-nav > li > a:hover,
-.navbar-seanjs .navbar-nav > li > a:focus {
-    color: #333;
+.navbar-seanjs .navbar-nav > li > a:hover, .navbar-seanjs .navbar-nav > li > a:focus {
+  color: #333;
 }
-.navbar-seanjs .navbar-nav > .active > a, 
-.navbar-seanjs .navbar-nav > .active > a:hover, 
-.navbar-seanjs .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
+.navbar-seanjs .navbar-nav > .active > a, .navbar-seanjs .navbar-nav > .active > a:hover, .navbar-seanjs .navbar-nav > .active > a:focus {
+  color: #555;
+  background-color: #E7E7E7;
 }
-.navbar-seanjs .navbar-nav > .open > a, 
-.navbar-seanjs .navbar-nav > .open > a:hover, 
-.navbar-seanjs .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
+.navbar-seanjs .navbar-nav > .open > a, .navbar-seanjs .navbar-nav > .open > a:hover, .navbar-seanjs .navbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #D5D5D5;
 }
+
 /* caret */
+
 .navbar-seanjs .navbar-nav > .dropdown > a .caret {
-    border-top-color: #f1f1f1;
-    border-bottom-color: #f1f1f1;
+  border-top-color: #f1f1f1;
+  border-bottom-color: #f1f1f1;
 }
-.navbar-seanjs .navbar-nav > .dropdown > a:hover .caret,
-.navbar-seanjs .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: #333;
-    border-bottom-color: #333;
+.navbar-seanjs .navbar-nav > .dropdown > a:hover .caret, .navbar-seanjs .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #333;
+  border-bottom-color: #333;
 }
-.navbar-seanjs .navbar-nav > .open > a .caret, 
-.navbar-seanjs .navbar-nav > .open > a:hover .caret, 
-.navbar-seanjs .navbar-nav > .open > a:focus .caret {
-    border-top-color: #555;
-    border-bottom-color: #555;
+.navbar-seanjs .navbar-nav > .open > a .caret, .navbar-seanjs .navbar-nav > .open > a:hover .caret, .navbar-seanjs .navbar-nav > .open > a:focus .caret {
+  border-top-color: #555;
+  border-bottom-color: #555;
 }
+
 /* mobile version */
+
 .navbar-seanjs .navbar-toggle {
-    border-color: #DDD;
+  border-color: #DDD;
 }
-.navbar-seanjs .navbar-toggle:hover,
-.navbar-seanjs .navbar-toggle:focus {
-    background-color: #DDD;
+.navbar-seanjs .navbar-toggle:hover, .navbar-seanjs .navbar-toggle:focus {
+  background-color: #DDD;
 }
 .navbar-seanjs .navbar-toggle .icon-bar {
-    background-color: #CCC;
+  background-color: #CCC;
 }
 @media (max-width: 767px) {
-    .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a {
-        color: #777;
-    }
-    .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #333;
-    }
+  .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a {
+    color: #777;
+  }
+  .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-seanjs .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+  }
 }
 .navbar-nav > li > a {
-   text-shadow: none;
+  text-shadow: none;
 }
-.footer{
+.footer {
   padding: 30px;
   background: #eee;
   border-top: 1px solid #333;

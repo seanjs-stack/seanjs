@@ -1,9 +1,9 @@
 # How to contribute
 
 Support and contributions from the open source community are essential for keeping
-SEAN.JS Stack up to date and always improving! There are a few guidelines that we need
+SEAN.JS up to date and always improving! There are a few guidelines that we need
 contributors to follow to keep the project consistent, as well as allow us to keep
-maintaining SEAN.JS Stack in a reasonable amount of time.
+maintaining SEAN.JS in a reasonable amount of time.
 
 ## Creating an Issue
 
@@ -17,6 +17,7 @@ Before you create a new Issue:
 * Create a topic branch from the master branch.
 * Check for unnecessary whitespace / changes with `git diff --check` before committing.
 	* Also check that your code is formatted properly with spaces (hint: Use [.editorconfig](http://editorconfig.org/))
+	* **And would strongly suggest to use [atom-beautify ](https://atom.io/packages/atom-beautify)**
 * Keep git commit messages clear and appropriate
 	* If possible, please "squash" your commits to as few commits as possible/reasonable such as one commit for implementation, one for tests, and one for documentation before finally squashing to one commit when getting the LGTM from a collaborator.
 * Make Sure you have added any tests necessary to test your code.

@@ -5,8 +5,8 @@
  * Credit: https://github.com/paulyoder/angular-bootstrap-show-errors */
 
 angular.module('core')
-  .directive('showErrors', ['$timeout', '$interpolate', function ($timeout, $interpolate) {
-    var linkFn = function (scope, el, attrs, formCtrl) {
+  .directive('showErrors', ['$timeout', '$interpolate', function($timeout, $interpolate) {
+    var linkFn = function(scope, el, attrs, formCtrl) {
       var inputEl, inputName, inputNgEl, options, showSuccess, toggleClasses,
         initCheck = false,
         showValidationMessages = false,
@@ -22,21 +22,21 @@ angular.module('core')
         throw 'show-errors element has no child input elements with a \'name\' attribute class';
       }
 
-      var reset = function () {
-        return $timeout(function () {
+      var reset = function() {
+        return $timeout(function() {
           el.removeClass('has-error');
           el.removeClass('has-success');
           showValidationMessages = false;
         }, 0, false);
       };
 
-      scope.$watch(function () {
+      scope.$watch(function() {
         return formCtrl[inputName] && formCtrl[inputName].$invalid;
-      }, function (invalid) {
+      }, function(invalid) {
         return toggleClasses(invalid);
       });
 
-      scope.$on('show-errors-check-validity', function (event, name) {
+      scope.$on('show-errors-check-validity', function(event, name) {
         if (angular.isUndefined(name) || formCtrl.$name === name) {
           initCheck = true;
           showValidationMessages = true;
@@ -45,13 +45,13 @@ angular.module('core')
         }
       });
 
-      scope.$on('show-errors-reset', function (event, name) {
+      scope.$on('show-errors-reset', function(event, name) {
         if (angular.isUndefined(name) || formCtrl.$name === name) {
           return reset();
         }
       });
 
-      toggleClasses = function (invalid) {
+      toggleClasses = function(invalid) {
         el.toggleClass('has-error', showValidationMessages && invalid);
         if (showSuccess) {
           return el.toggleClass('has-success', showValidationMessages && !invalid);
@@ -62,7 +62,7 @@ angular.module('core')
     return {
       restrict: 'A',
       require: '^form',
-      compile: function (elem, attrs) {
+      compile: function(elem, attrs) {
         if (attrs.showErrors.indexOf('skipFormGroupCheck') === -1) {
           if (!(elem.hasClass('form-group') || elem.hasClass('input-group'))) {
             throw 'show-errors element does not have the \'form-group\' or \'input-group\' class';
@@ -71,4 +71,4 @@ angular.module('core')
         return linkFn;
       }
     };
-}]);
+  }]);

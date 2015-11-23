@@ -2,7 +2,7 @@
 
 // Setting up route
 angular.module('user.admin.routes').config(['$stateProvider',
-  function ($stateProvider) {
+  function($stateProvider) {
     $stateProvider
       .state('admin.users', {
         url: '/users',
@@ -14,7 +14,7 @@ angular.module('user.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
         controller: 'UserController',
         resolve: {
-          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+          userResolve: ['$stateParams', 'Admin', function($stateParams, Admin) {
             return Admin.get({
               userId: $stateParams.userId
             });
@@ -26,7 +26,7 @@ angular.module('user.admin.routes').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
         controller: 'UserController',
         resolve: {
-          userResolve: ['$stateParams', 'Admin', function ($stateParams, Admin) {
+          userResolve: ['$stateParams', 'Admin', function($stateParams, Admin) {
             return Admin.get({
               userId: $stateParams.userId
             });

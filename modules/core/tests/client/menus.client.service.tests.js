@@ -276,8 +276,12 @@
 
       beforeEach(function() {
         Menus.addMenu(menuId);
-        Menus.addMenuItem(menuId, { state: menuItemState });
-        Menus.addMenuItem(menuId, { state: menuItemState2 });
+        Menus.addMenuItem(menuId, {
+          state: menuItemState
+        });
+        Menus.addMenuItem(menuId, {
+          state: menuItemState2
+        });
         Menus.validateMenuExistance = jasmine.createSpy();
         menu = Menus.removeMenuItem(menuId, menuItemState);
       });
@@ -328,7 +332,9 @@
         Menus.addMenu(menuId);
         Menus.addMenuItem(menuId, menuItem1Options);
         Menus.addMenuItem(menuId, menuItem2Options);
-        Menus.addMenuItem(menuId, {state:'something.else'});
+        Menus.addMenuItem(menuId, {
+          state: 'something.else'
+        });
         Menus.addSubMenuItem(menuId, menuItem1Options.state, subItemOptions);
         menu = Menus.addSubMenuItem(menuId, menuItem1Options.state);
         menuItem1 = menu.items[0];
@@ -405,21 +411,21 @@
           expect(subItem2.position).toBe(0);
         });
       });
-      
+
       describe('then removeSubMenuItem', function() {
         beforeEach(function() {
           Menus.validateMenuExistance = jasmine.createSpy();
           menu = Menus.removeSubMenuItem(menuId, subItem1.state);
         });
-  
+
         it('should validate menu existance', function() {
           expect(Menus.validateMenuExistance).toHaveBeenCalledWith(menuId);
         });
-  
+
         it('should return menu object', function() {
           expect(menu).toBeDefined();
         });
-  
+
         it('should remove sub menu item', function() {
           expect(menuItem1.items.length).toBe(1);
           expect(menuItem1.items[0].state).toEqual(subItem2.state);

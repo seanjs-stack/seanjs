@@ -4,28 +4,28 @@
  * Module dependencies.
  */
 var path = require('path'),
-	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-	db = require(path.resolve('./config/lib/sequelize')).models,
-	User = db.user;
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  db = require(path.resolve('./config/lib/sequelize')).models,
+  User = db.user;
 
 
 /**
  * Show the current user
  */
-exports.read = function (req, res) {
+exports.read = function(req, res) {
   res.json(req.model);
 };
 
 /**
  * Update a User
  */
-exports.update = function (req, res) {
+exports.update = function(req, res) {
 
   User.find({
     where: {
       id: req.model.id
     }
-  }).then(function (user) {
+  }).then(function(user) {
     if (user) {
 
       user.firstName = req.body.firstName;
@@ -36,20 +36,20 @@ exports.update = function (req, res) {
       user.roles = req.body.roles;
       user.updatedAt = Date.now();
 
-      user.save().then(function () {
-	res.json(user);
-      }).catch(function (err) {
-	res.status(400).send({
-	  message: errorHandler.getErrorMessage(err)
-	});
+      user.save().then(function() {
+        res.json(user);
+      }).catch(function(err) {
+        res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
       });
 
     } else {
       return res.status(400).send({
-	message: 'Could not find user'
+        message: 'Could not find user'
       });
     }
-  }).catch(function (err) {
+  }).catch(function(err) {
     res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
@@ -60,20 +60,20 @@ exports.update = function (req, res) {
 /**
  * Delete a user
  */
-exports.delete = function (req, res) {
+exports.delete = function(req, res) {
 
   User.find({
     where: {
       id: req.model.id
     }
-  }).then(function (user) {
+  }).then(function(user) {
     if (user) {
-      user.destroy().then(function () {
-	return res.json(user);
-      }).catch(function (err) {
-	return res.status(400).send({
-	  message: errorHandler.getErrorMessage(err)
-	});
+      user.destroy().then(function() {
+        return res.json(user);
+      }).catch(function(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
       });
     }
   });
@@ -83,20 +83,20 @@ exports.delete = function (req, res) {
 /**
  * List of Users
  */
-exports.list = function (req, res) {
+exports.list = function(req, res) {
   User.findAll({
     order: [
       ['createdAt', 'DESC']
     ]
-  }).then(function (users) {
+  }).then(function(users) {
     if (!users) {
       return res.status(400).send({
-	message: 'Unable to get list of users'
+        message: 'Unable to get list of users'
       });
     } else {
       res.json(users);
     }
-  }).catch(function (err) {
+  }).catch(function(err) {
     res.jsonp(err);
   });
 };
@@ -104,14 +104,14 @@ exports.list = function (req, res) {
 /**
  * User middleware
  */
-exports.userByID = function (req, res, next, id) {
+exports.userByID = function(req, res, next, id) {
   if (!id) {
     return res.status(400).send({
       message: 'User is invalid'
     });
   }
 
-  User.findById(id).then(function (user) {
+  User.findById(id).then(function(user) {
     if (!user) {
       return next(new Error('Failed to load user ' + id));
     } else {
@@ -132,7 +132,7 @@ exports.userByID = function (req, res, next, id) {
       req.model = data;
       next();
     }
-  }).catch(function (err) {
+  }).catch(function(err) {
     return next(err);
   });
 

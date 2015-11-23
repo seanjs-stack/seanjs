@@ -2,7 +2,7 @@
 
 // Create the 'chat' controller
 angular.module('chat').controller('ChatController', ['$scope', '$location', 'Authentication', 'Socket',
-  function ($scope, $location, Authentication, Socket) {
+  function($scope, $location, Authentication, Socket) {
     // Create a messages array
     $scope.messages = [];
 
@@ -17,12 +17,12 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     }
 
     // Add an event listener to the 'chatMessage' event
-    Socket.on('chatMessage', function (message) {
+    Socket.on('chatMessage', function(message) {
       $scope.messages.unshift(message);
     });
 
     // Create a controller method for sending messages
-    $scope.sendMessage = function () {
+    $scope.sendMessage = function() {
       // Create a new message object
       var message = {
         text: this.messageText
@@ -36,7 +36,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     };
 
     // Remove the event listener when the controller instance is destroyed
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function() {
       Socket.removeListener('chatMessage');
     });
   }

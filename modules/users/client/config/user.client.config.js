@@ -2,12 +2,12 @@
 
 // Config HTTP Error Handling
 angular.module('user').config(['$httpProvider',
-  function ($httpProvider) {
+  function($httpProvider) {
     // Set the httpProvider "not authorized" interceptor
     $httpProvider.interceptors.push(['$q', '$location', 'Authentication',
-      function ($q, $location, Authentication) {
+      function($q, $location, Authentication) {
         return {
-          responseError: function (rejection) {
+          responseError: function(rejection) {
             switch (rejection.status) {
               case 401:
                 // Deauthenticate the global user
