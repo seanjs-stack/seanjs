@@ -9,9 +9,15 @@ module.exports = {
      port: process.env.DB_PORT || 5432,
      username: process.env.DB_USERNAME || "postgres",
      password: process.env.DB_PASSWORD || "postgres",
-     dialect: process.env.DB_DIALECT || "postgres",
+     dialect: process.env.DB_DIALECT || "postgres", //mysql, postgres, sqlite3,...
      enableSequelizeLog: process.env.DB_LOG || false,
      ssl: process.env.DB_SSL || false
+   },
+   redis: {
+     host: process.env.REDIS_HOST || "localhost",
+     port: process.env.REDIS_PORT || 6379,
+     database: process.env.REDIS_DATABASE || 0,
+     password: process.env.REDIS_PASSWORD || "",
    },
    log: {
       // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'

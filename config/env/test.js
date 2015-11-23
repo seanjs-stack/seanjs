@@ -3,6 +3,7 @@
 var defaultEnvConfig = require('./default');
 
 module.exports = {
+   port: process.env.PORT || 3001,
    db: {
      name: process.env.DB_NAME || "seanjs_dev",
      host: process.env.DB_HOST || "localhost",
@@ -13,7 +14,12 @@ module.exports = {
      enableSequelizeLog: process.env.DB_LOG || true,
      ssl: process.env.DB_SSL || false
    },
-   port: process.env.PORT || 3001,
+   redis: {
+     host: process.env.REDIS_HOST || "localhost",
+     port: process.env.REDIS_PORT || 6379,
+     database: process.env.REDIS_DATABASE || 0,
+     password: process.env.REDIS_PASSWORD || "",
+   },
    app: {
       title: defaultEnvConfig.app.title + ' - Test Environment'
    },

@@ -17,6 +17,12 @@ module.exports = {
     enableSequelizeLog: process.env.DB_LOG || false,
     ssl: process.env.DB_SSL || false
   },
+  redis: {
+    host: process.env.REDIS_HOST || "localhost",
+    port: process.env.REDIS_PORT || 6379,
+    database: process.env.REDIS_DATABASE || 0,
+    password: process.env.REDIS_PASSWORD || "",
+  },
   log: {
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
     format: 'combined',

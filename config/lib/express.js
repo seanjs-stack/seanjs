@@ -134,6 +134,7 @@ module.exports.initViewEngine = function(app) {
 module.exports.initSession = function(app, db) {
   winston.info('Initializing Session...');
 
+console.log('config.redis.host', config.redis.host);
   app.use(session({
     saveUninitialized: true,
     resave: true,
@@ -145,10 +146,10 @@ module.exports.initSession = function(app, db) {
     },
     key: config.sessionKey,
     store: new RedisStore({
-      host: 'localhost',
-      port: 6379,
-      db: 0,
-      pass: ''
+      host: config.redis.host || 'localhost',
+      port: config.redis.port || 6379,
+      db: config.redis.database || 0,
+      pass: config.redis.password || ''
     })
   }));
 };
