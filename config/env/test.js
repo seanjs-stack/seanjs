@@ -4,14 +4,14 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
    db: {
-      name: "seanjs_dev",
-      host: "localhost",
-      port: 5432,
-      username: "postgres",
-      password: "postgres",
-      dialect: "postgres", //mysql, postgres, sqlite3,...
-      enableSequelizeLog: false,
-      ssl: false
+     name: process.env.DB_NAME || "seanjs_dev",
+     host: process.env.DB_HOST || "localhost",
+     port: process.env.DB_PORT || 5432,
+     username: process.env.DB_USERNAME || "postgres",
+     password: process.env.DB_PASSWORD || "postgres",
+     dialect: process.env.DB_DIALECT || "postgres", //mysql, postgres, sqlite3,...
+     enableSequelizeLog: process.env.DB_LOG || true,
+     ssl: process.env.DB_SSL || false
    },
    port: process.env.PORT || 3001,
    app: {

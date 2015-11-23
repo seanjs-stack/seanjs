@@ -4,6 +4,7 @@
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/seanjs-stack/seanjs.svg?branch=master)](https://travis-ci.org/seanjs-stack/seanjs)
 [![Dependencies Status](https://david-dm.org/seanjs-stack/seanjs.svg)](https://david-dm.org/seanjs-stack/seanjs)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](http://seanjs.herokuapp.com)
 
 [![NPM](https://nodei.co/npm/generator-seanjs.png?downloads=true)](https://nodei.co/npm/generator-seanjs/)
 
@@ -148,6 +149,19 @@ And to run only the client tests, run the test:client task:
 ```bash
 $ grunt test:client
 ```
+
+---
+## Heroku Database - Testing
+
+After installing the **SEAN.JS** if you didn't setup the `postgresql` database yet.
+You can run this command to run the application on a testing heroku database:
+
+`DB_NAME="dfuue4lro8u0qk" DB_HOST="ec2-54-217-240-205.eu-west-1.compute.amazonaws.com" DB_USERNAME="xjwecgnyhogzdw" DB_PASSWORD="iH1awetnARl9-HltdMqMWuF0dN" DB_SSL=true node server.js`
+
+And you can see the changes in the database also here http://seanjs.herokuapp.com
+
+Look for `config/env/heroku_example.js` for more info
+
 ---
 ## DigitalOcean - One-Click Apps
 

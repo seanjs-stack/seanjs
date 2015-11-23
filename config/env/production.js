@@ -2,20 +2,20 @@
 
 module.exports = {
   secure: {
-    ssl: true,
+    ssl: process.env.ssl || false,
     privateKey: './config/sslcerts/key.pem',
     certificate: './config/sslcerts/cert.pem'
   },
   port: process.env.PORT || 8443,
   db: {
-    name: "seanjs_dev",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "postgres",
-    dialect: "postgres", //mysql, postgres, sqlite3,...
-    enableSequelizeLog: false,
-    ssl: false
+    name: process.env.DB_NAME || "seanjs_dev",
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT || 5432,
+    username: process.env.DB_USERNAME || "postgres",
+    password: process.env.DB_PASSWORD || "postgres",
+    dialect: process.env.DB_DIALECT || "postgres", //mysql, postgres, sqlite3,...
+    enableSequelizeLog: process.env.DB_LOG || false,
+    ssl: process.env.DB_SSL || false
   },
   log: {
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
