@@ -17,20 +17,23 @@ module.exports = function(app, db) {
 
   // Serialize sessions
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    var userData = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      displayName: user.displayName,
+      username: user.username,
+      email: user.email,
+      profileImageURL: user.profileImageURL,
+      roles: user.roles,
+      additionalProvidersData: user.additionalProvidersData
+    };
+    done(null, userData);
   });
 
   // Deserialize sessions
-  passport.deserializeUser(function(id, done) {
-    User.findOne({
-      attributes: ['id', 'displayName', 'email', 'profileImageURL', 'roles', 'additionalProvidersData'],
-      where: {
-        id: id
-      }
-    }).then(function(user) {
-      var err = (!user) ? true : false;
-      done(err, user);
-    });
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
   });
 
   // Initialize strategies
