@@ -24,6 +24,9 @@ public/uploads/users/profile/*
 config/env/local.js
 *.pem
 
+modules/users/server/controllers/users/local/*
+modules/users/server/models/local/*
+
 # Ignoring SEAN.JS Stack's gh-pages branch for documenation
 _site/
 
