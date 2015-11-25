@@ -41,12 +41,15 @@ exports.signup = function(req, res) {
   user.save().then(function() {
     req.login(user, function(err) {
       if (err)
-      //return next(err);
-        res.status(400).send(err);
+        res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
       res.json(user);
     });
   }).catch(function(err) {
-    res.status(400).send(err);
+    res.status(400).send({
+      message: errorHandler.getErrorMessage(err)
+    });
   });
 };
 
@@ -58,7 +61,9 @@ exports.signin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
 
     if (err || !user) {
-      res.status(400).send(info);
+      res.status(400).send({
+        message: err
+      });
     } else {
       // Remove sensitive data before login
       user.password = undefined;
@@ -66,7 +71,9 @@ exports.signin = function(req, res, next) {
 
       req.login(user, function(err) {
         if (err) {
-          res.status(400).send(err);
+          res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
         } else {
           res.json(user);
         }
@@ -137,6 +144,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
         email: providerUserProfile.email
       }
     }).then(function(user) {
+
       if (user) {
 
         // Add the provider data to the additional provider data field
@@ -162,10 +170,9 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 
       } else {
         //A new user...
-        //
+
         // Define a search query fields
         var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-        var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
 
         // Define main provider search query
         var mainProviderSearchQuery = {};
@@ -173,6 +180,8 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
         mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
         // Define additional provider search query
+        var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+
         var additionalProviderSearchQuery = {};
         additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
 
@@ -182,13 +191,28 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
           }
         }).then(function(user) {
           if (user) { //The user already have the providerIdentifierField
-            req.login(user, function(err) {
-              if (err)
-                return done(new Error(err), user);
-              return done(false, user);
-            });
-          } else {
 
+            //Update their info
+            user.firstName = providerUserProfile.firstName;
+            user.lastName = providerUserProfile.lastName;
+            user.displayName = providerUserProfile.displayName;
+            user.profileImageURL = providerUserProfile.profileImageURL;
+            user.provider = providerUserProfile.provider;
+            user.providerData = providerUserProfile.providerData;
+
+            user.save().then(function() {
+
+              req.login(user, function(err) {
+                if (err)
+                  return done(new Error(err), user);
+                return done(false, user);
+              });
+
+            }).catch(function(err) {
+              return done(false, err);
+            });
+
+          } else {
             var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
             User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
@@ -223,6 +247,8 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
             });
 
           }
+        }).catch(function(err) {
+          return done(false, err);
         });
 
       }
@@ -283,7 +309,9 @@ exports.removeOAuthProvider = function(req, res, next) {
   user.save().then(function(user) {
     req.login(user, function(err) {
       if (err) {
-        return res.status(400).send(err);
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
       } else {
         return res.json(user);
       }
