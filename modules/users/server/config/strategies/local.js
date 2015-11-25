@@ -17,21 +17,20 @@ module.exports = function() {
       passwordField: 'password'
     },
     function(username, password, done) {
-
       User.findOne({
         where: {
           username: username.toLowerCase()
         }
       }).then(function(user) {
         if (!user) {
-          return done(user);
+          return done('Invalid username or password', null, null);
         }
         if (!user || !user.authenticate(password)) {
-          return done(null, false, {
-            message: 'Invalid username or password'
-          });
+          return done('Invalid username or password', null, null);
         }
-        return done(null, user);
+        return done(null, user, null);
+      }).catch(function(err) {
+        return done(err, null, null);
       });
     }
   ));
