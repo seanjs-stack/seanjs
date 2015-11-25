@@ -22,8 +22,10 @@ exports.update = function(req, res) {
   delete req.body.roles;
 
   if (user) {
+
     // Merge existing user
-    user = _.extend(user, req.body);
+    user = User.build(_.extend(user, req.body));
+
     user.updatedAt = Date.now();
     user.displayName = user.firstName + ' ' + user.lastName;
 
