@@ -136,7 +136,6 @@ module.exports.initViewEngine = function(app) {
 module.exports.initSession = function(app, db) {
   winston.info('Initializing Session...');
 
-  console.log('config.redis.host', config.redis.host);
   app.use(session({
     saveUninitialized: true,
     resave: true,
