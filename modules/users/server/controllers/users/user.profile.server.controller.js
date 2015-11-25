@@ -21,7 +21,7 @@ exports.update = function(req, res, next) {
     async.waterfall([
       function(done) {
 
-        if (userInfo.email.toLowerCase() != req.user.email.toLowerCase()) {
+        if (userInfo.email.toLowerCase() !== req.user.email.toLowerCase()) {
           User.findOne({
             where: {
               email: {
@@ -32,7 +32,7 @@ exports.update = function(req, res, next) {
               }
             }
           }).then(function(user) {
-            if (user && user.email.toLowerCase() == userInfo.email.toLowerCase()) {
+            if (user && user.email.toLowerCase() === userInfo.email.toLowerCase()) {
               return res.status(400).send({
                 message: 'Email already exists'
               });
@@ -48,7 +48,7 @@ exports.update = function(req, res, next) {
         }
       },
       function(done) {
-        if (userInfo.username.toLowerCase() != req.user.username.toLowerCase()) {
+        if (userInfo.username.toLowerCase() !== req.user.username.toLowerCase()) {
           User.findOne({
             where: {
               username: {
@@ -59,7 +59,7 @@ exports.update = function(req, res, next) {
               }
             }
           }).then(function(user) {
-            if (user && user.username.toLowerCase() == userInfo.username.toLowerCase()) {
+            if (user && user.username.toLowerCase() === userInfo.username.toLowerCase()) {
               return res.status(400).send({
                 message: 'Username already exists'
               });
