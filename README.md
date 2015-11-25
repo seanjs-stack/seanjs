@@ -29,6 +29,8 @@ Based on **MEAN Stack**
 
 For more info, please visit [http://seanjs.org/status](http://seanjs.org/status)
 
+Live example: http://seanjs.herokuapp.com
+
 ---
 
 ### Installation
