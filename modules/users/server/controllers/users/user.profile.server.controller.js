@@ -5,50 +5,112 @@
  */
 var _ = require('lodash'),
   fs = require('fs'),
+  async = require('async'),
   path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   db = require(path.resolve('./config/lib/sequelize')).models,
   User = db.user;
 
 
-/**
- * Update user details
- */
-exports.update = function(req, res) {
-  // Init Variables
-  var user = req.user;
+exports.update = function(req, res, next) {
+  var userInfo = req.body;
 
-  // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
+  if (userInfo) {
 
-  if (user) {
+    async.waterfall([
+      function(done) {
 
-    // Merge existing user
-    user = User.build(_.extend(user, req.body));
-
-    user.updatedAt = Date.now();
-    user.displayName = user.firstName + ' ' + user.lastName;
-
-    user.save().then(function(user) {
-      if (!user) {
-        return res.status(400).send({
-          message: 'Unable to update'
-        });
-      } else {
-        req.login(user, function(err) {
-          if (err) {
-            res.status(400).send(err);
-          } else {
-            res.json(user);
+        if (userInfo.email.toLowerCase() != req.user.email.toLowerCase()) {
+          User.findOne({
+            where: {
+              email: {
+                like: userInfo.email
+              },
+              id: {
+                '$ne': req.user.id
+              }
+            }
+          }).then(function(user) {
+            if (user && user.email.toLowerCase() == userInfo.email.toLowerCase()) {
+              return res.status(400).send({
+                message: 'Email already exists'
+              });
+            }
+            done(null);
+          }).catch(function(err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          });
+        } else {
+          done(null);
+        }
+      },
+      function(done) {
+        if (userInfo.username.toLowerCase() != req.user.username.toLowerCase()) {
+          User.findOne({
+            where: {
+              username: {
+                like: userInfo.username
+              },
+              id: {
+                '$ne': req.user.id
+              }
+            }
+          }).then(function(user) {
+            if (user && user.username.toLowerCase() == userInfo.username.toLowerCase()) {
+              return res.status(400).send({
+                message: 'Username already exists'
+              });
+            }
+            done(null);
+          }).catch(function(err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          });
+          done(null);
+        } else {
+          done(null);
+        }
+      },
+      function(done) {
+        User.findOne({
+          where: {
+            id: req.user.id
           }
-        });
-      }
-    }).catch(function(err) {
-      res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    });
+        }).then(function(user) {
 
+          user.firstName = userInfo.firstName;
+          user.lastName = userInfo.lastName;
+          user.username = userInfo.username;
+          user.email = userInfo.email.toLowerCase();
+          user.updated = Date.now();
+          user.displayName = userInfo.firstName + ' ' + userInfo.lastName;
+
+          user.save().then(function(user) {
+            if (!user) {
+              return res.status(400).send({
+                message: 'Unable to update'
+              });
+            } else {
+              res.json(user);
+            }
+          }).catch(function(err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          });
+
+        });
+        done(null);
+      }
+    ]);
+  } else {
+    res.status(401).send({
+      message: 'User is not signed in'
+    });
   }
 };
 
