@@ -6,10 +6,6 @@
 
 var crypto = require('crypto');
 
-Array.prototype.contains = function(element) {
-  return this.indexOf(element) > -1;
-};
-
 /**
  * A Validation function for local strategy properties
  */
@@ -69,34 +65,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     profileImageURL: DataTypes.STRING,
     roles: {
-      type: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.STRING,
+      type: DataTypes.JSON,
       defaultValue: ["user"],
-      isArray: true,
-      validate: {
-        //len: [1, 99], // the array has to be at least three and max 99 elements long
-        isVaidRole: function(role) {
-          // if (!role) throw new Error("Role cannot be empty");
-          //
-          //
-          // var nrole = ['user', 'admin'];
-          // var validRoles = ['admin', 'user', 'guest'];
-          //
-          // if (nrole.length <= validRoles.length) {
-          //   if (nrole.length === 1 && validRoles.indexOf(nrole) < 0) {
-          //     throw new Error("Invalid roles 1");
-          //   } else if (nrole.length > 1 && !validRoles.contains(nrole)) {
-          //     throw new Error("Invalid roles 2");
-          //   } else if (nrole.length === validRoles.length && validRoles.sort().toString() !== nrole.sort().toString()) {
-          //     throw new Error("Invalid roles 2");
-          //   } else {
-          //     throw new Error("Invalid roles 3");
-          //   }
-          // } else {
-          //   throw new Error("Invalid roles 4");
-          // }
-
-        }
-      }
+      isArray: true
     },
     hashedPassword: {
       type: DataTypes.STRING,
@@ -106,15 +77,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     provider: DataTypes.STRING,
-    providerData: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
-    additionalProvidersData: (sequelize.options.dialect === 'postgres') ? DataTypes.JSON : DataTypes.TEXT,
+    providerData: {
+      type: DataTypes.JSON
+    },
+    additionalProvidersData: {
+      type: DataTypes.JSON
+    },
     salt: DataTypes.STRING,
-    facebookUserId: DataTypes.INTEGER,
-    twitterUserId: DataTypes.INTEGER,
-    twitterKey: DataTypes.STRING,
-    twitterSecret: DataTypes.STRING,
-    github: DataTypes.STRING,
-    openId: DataTypes.STRING,
     resetPasswordToken: DataTypes.STRING,
     resetPasswordExpires: DataTypes.BIGINT
   }, {
