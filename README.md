@@ -36,35 +36,36 @@ Live example: http://seanjs.herokuapp.com
 ### Installation
 
 ### Before you start, make sure you have these prerequisites installed:
+
  * PostgreSQL 9.4 or MySQL, MariaDB, SQLite and MSSQL *(Depending on your project but SEAN.JS defaults to PostgreSQL 9.4)*
  * Redis Server
  * Node.js
  * NPM
 
- ---
+---
 
- ##### Using Yeoman Generator:
+##### Using Yeoman Generator:
 
- Check [SEAN.JS Stack Official Yeoman Generator](https://www.npmjs.com/package/generator-seanjs)
+Check [SEAN.JS Stack Official Yeoman Generator](https://www.npmjs.com/package/generator-seanjs)
 
- ```sh
- $  npm install -g yo
- ```
- **Note:** Your user might not have the permissions to install package globally, so use a super user or **sudo**.
+```sh
+$  npm install -g yo
+```
+**Note:** Your user might not have the permissions to install package globally, so use a super user or **sudo**.
 
- Once you have *yo* installed, you will need to install the **SEAN.JS** Stack generator as well:
+Once you have *yo* installed, you will need to install the **SEAN.JS** Stack generator as well:
 
- ```bash
- $  npm install -g generator-seanjs
- ```
+```bash
+$  npm install -g generator-seanjs
+```
 
- ```bash
- $ yo seanjs
- ```
+```bash
+$ yo seanjs
+```
 
- You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
+You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
 
- ---
+---
 
 ##### Using Command Line:
 
