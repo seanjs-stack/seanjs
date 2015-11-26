@@ -41,6 +41,37 @@ Live example: http://seanjs.herokuapp.com
  * Node.js
  * NPM
 
+ ##### For MySQL, MariaDB, SQLite and MSSQL
+
+ Please check the [Template Folder in the SEAN.JS Generator](https://github.com/seanjs-stack/generator-seanjs/tree/master/app/templates/master/modules)
+
+ Simply replace these files and update your database in the `config/env/`
+
+ ---
+
+ ##### Using Yeoman Generator:
+
+ Check [SEAN.JS Stack Official Yeoman Generator](https://www.npmjs.com/package/generator-seanjs)
+
+ ```sh
+ $  npm install -g yo
+ ```
+ **Note:** Your user might not have the permissions to install package globally, so use a super user or **sudo**.
+
+ Once you have *yo* installed, you will need to install the **SEAN.JS** Stack generator as well:
+
+ ```bash
+ $  npm install -g generator-seanjs
+ ```
+
+ ```bash
+ $ yo seanjs
+ ```
+
+ You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
+
+ ---
+
 ##### Using Command Line:
 
 ```bash
@@ -70,36 +101,6 @@ $ bower install --alow-root
 ```bash
 $ node server.js
 ```
-
-##### For MySQL, MariaDB, SQLite and MSSQL
-
-Please check the [Template Folder in the SEAN.JS Generator](https://github.com/seanjs-stack/generator-seanjs/tree/master/app/templates/master/modules)
-
-Simply replace these files and update your database in the `config/env/`
-
----
-
-##### Using Yeoman Generator:
-
-Check [SEAN.JS Stack Official Yeoman Generator](https://www.npmjs.com/package/generator-seanjs)
-
-```sh
-$  npm install -g yo
-```
-**Note:** Your user might not have the permissions to install package globally, so use a super user or **sudo**.
-
-Once you have *yo* installed, you will need to install the **SEAN.JS** Stack generator as well:
-
-```bash
-$  npm install -g generator-seanjs
-```
-
-```bash
-$ yo seanjs
-```
-
-You are now ready to get started with the SEAN.JS generator. The generator will help you create a SEAN application.
-
 
 ---
 
