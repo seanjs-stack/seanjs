@@ -3,6 +3,11 @@
 var defaultEnvConfig = require('./default');
 
 module.exports = {
+  secure: {
+    ssl: Boolean(process.env.ssl) || false,
+    privateKey: './config/sslcerts/key.pem',
+    certificate: './config/sslcerts/cert.pem'
+  },
   db: {
     name: process.env.DB_NAME || "seanjs_dev",
     host: process.env.DB_HOST || "localhost",
