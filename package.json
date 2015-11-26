@@ -2,7 +2,7 @@
   "name": "seanjs",
   "description": "Full-Stack Javascript with SequelizeJS, ExpressJS, AngularJS, and Node.js",
   "version": "0.0.1",
-  "seanjs-version": "0.0.30",
+  "seanjs-version": "0.0.31",
   "private": false,
   "author": "https://github.com/seanjs-stack/seanjs/graphs/contributors",
   "license": "MIT",
