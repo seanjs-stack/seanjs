@@ -31,7 +31,7 @@ module.exports.start = function start(callback) {
       console.log(chalk.green('Environment:\t\t') + process.env.NODE_ENV);
       console.log(chalk.green('Port:\t\t\t') + config.port);
       console.log(chalk.green('Database:\t\t') + config.db.name);
-      if (config.secure.ssl === true) {
+      if (config.secure && config.secure.ssl === true) {
         console.log(chalk.green('SSL:\t\t\tON'));
       }
       console.info(chalk.green('App version:\t\t') + config.seanjs.version);
