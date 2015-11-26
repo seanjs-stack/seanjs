@@ -81,6 +81,8 @@ Simply replace these files and update your database in the `config/env/`
 
 ##### Using Yeoman Generator:
 
+Check [SEAN.JS Stack Official Yeoman Generator](https://www.npmjs.com/package/generator-seanjs)
+
 ```sh
 $  npm install -g yo
 ```
