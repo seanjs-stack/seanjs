@@ -61,10 +61,10 @@ module.exports = function(app, db) {
   var io = socketio.listen(server);
 
   var redisStore = new RedisStore({
-    host: 'localhost',
-    port: 6379,
-    db: 0,
-    pass: ''
+    host: config.redis.host || 'localhost',
+    port: config.redis.port || 6379,
+    db: config.redis.database || 0,
+    pass: config.redis.password || ''
   });
 
   // Intercept Socket.io's handshake request

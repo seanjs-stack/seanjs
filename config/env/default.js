@@ -19,7 +19,7 @@ module.exports = {
     // secure cookie should be turned to true to provide additional
     // layer of security so that the cookie is set only when working
     // in HTTPS mode.
-    secure: false
+    secure: Boolean(process.env.ssl) || true
   },
   // sessionSecret should be changed for security measures and concerns
   sessionSecret: 'SEANJS',

@@ -26,20 +26,20 @@ module.exports.start = function start(callback) {
     app.listen(config.port, function() {
 
       // Logging initialization
-      console.log('----------------');
+      console.log('--------------------------');
       console.log(chalk.green(config.app.title));
       console.log(chalk.green('Environment:\t\t') + process.env.NODE_ENV);
       console.log(chalk.green('Port:\t\t\t') + config.port);
       console.log(chalk.green('Database:\t\t') + config.db.name);
-      if (process.env.NODE_ENV === 'secure') {
-        console.log(chalk.green('HTTPs:\ton'));
+      if (config.secure.ssl === true) {
+        console.log(chalk.green('SSL:\t\t\tON'));
       }
       console.info(chalk.green('App version:\t\t') + config.seanjs.version);
 
       if (config.seanjs['seanjs-version']) {
         console.log(chalk.green('SEAN.JS version:\t') + config.seanjs['seanjs-version']);
       }
-      console.log('----------------');
+      console.log('--------------------------');
 
       if (callback) callback(app, db, config);
     });

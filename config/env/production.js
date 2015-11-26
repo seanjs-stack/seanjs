@@ -2,7 +2,7 @@
 
 module.exports = {
   secure: {
-    ssl: process.env.ssl || false,
+    ssl: Boolean(process.env.ssl) || false,
     privateKey: './config/sslcerts/key.pem',
     certificate: './config/sslcerts/cert.pem'
   },
