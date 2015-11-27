@@ -39,5 +39,11 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
     $scope.$on('$destroy', function() {
       Socket.removeListener('chatMessage');
     });
+
+    // Get the current connected clients
+    Socket.on('currentClients', function(count) {
+      $scope.currentClients = count;
+    });
+
   }
 ]);

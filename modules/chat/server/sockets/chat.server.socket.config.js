@@ -2,6 +2,12 @@
 
 // Create the chat configuration
 module.exports = function(io, socket) {
+
+  // When client connects
+  io.on('connection', function() {
+    io.emit('currentClients', socket.server.engine.clientsCount);
+  });
+
   // Emit the status event when a new socket client is connected
   io.emit('chatMessage', {
     type: 'status',
@@ -24,11 +30,15 @@ module.exports = function(io, socket) {
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function() {
+    io.emit('currentClients', socket.server.engine.clientsCount);
     io.emit('chatMessage', {
       type: 'status',
       text: 'disconnected',
       created: Date.now(),
       username: socket.request.user.username
     });
+
   });
+
+
 };
