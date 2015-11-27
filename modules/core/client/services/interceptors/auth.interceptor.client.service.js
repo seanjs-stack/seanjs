@@ -12,6 +12,9 @@ angular.module('core').factory('authInterceptor', ['$q', '$injector',
             case 403:
               $injector.get('$state').transitionTo('forbidden');
               break;
+            case 404:
+              $injector.get('$state').transitionTo('not-found');
+              break;
           }
         }
         // otherwise, default behaviour
