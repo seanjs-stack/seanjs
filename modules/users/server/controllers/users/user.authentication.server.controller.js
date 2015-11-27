@@ -216,7 +216,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 
                       })
                       .on('error', function(err) {
-                        console.log('err', err)
+                        console.log('Unable to download user image', err);
                       })
                       .pipe(fs.createWriteStream('./public/uploads/users/profile/' + tmpImage));
                   } else {
@@ -297,7 +297,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 
                         })
                         .on('error', function(err) {
-                          console.log('Unable to download user image', err)
+                          console.log('Unable to download user image', err);
                         })
                         .pipe(fs.createWriteStream('./public/uploads/users/profile/' + tmpImage));
                     } else {
