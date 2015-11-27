@@ -84,10 +84,10 @@ exports.update = function(req, res, next) {
 
           user.firstName = userInfo.firstName;
           user.lastName = userInfo.lastName;
+          user.displayName = userInfo.firstName + ' ' + userInfo.lastName;
           user.username = userInfo.username;
           user.email = userInfo.email.toLowerCase();
-          user.updated = Date.now();
-          user.displayName = userInfo.firstName + ' ' + userInfo.lastName;
+          user.updatedAt = Date.now();
 
           user.save().then(function(user) {
             if (!user) {
@@ -149,7 +149,7 @@ exports.changeProfilePicture = function(req, res) {
                   fs.unlinkSync('./public/uploads/users/profile/' + oldImage);
                 }
               } catch (e) {
-                console.log('Unable to delete the old image');
+                console.log('Unable to delete the old image', e);
               }
             }
 
@@ -157,7 +157,6 @@ exports.changeProfilePicture = function(req, res) {
             res.json(user);
           }
         }).catch(function(err) {
-          console.log('err', err);
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
@@ -166,13 +165,10 @@ exports.changeProfilePicture = function(req, res) {
 
     }
   }).catch(function(err) {
-    console.log('err', err);
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
   });
-
-
 
 };
 
