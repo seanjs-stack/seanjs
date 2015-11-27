@@ -4,6 +4,9 @@
  * Module dependencies.
  */
 var path = require('path'),
+  fs = require('fs'),
+  request = require('request'),
+  async = require('async'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   passport = require('passport'),
   db = require(path.resolve('./config/lib/sequelize')).models,
@@ -169,7 +172,6 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
         });
 
       } else {
-        //A new user...
 
         // Define a search query fields
         var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
@@ -190,57 +192,156 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
             $or: [mainProviderSearchQuery, additionalProviderSearchQuery],
           }
         }).then(function(user) {
-          if (user) { //The user already have the providerIdentifierField
+          //The user already have the providerIdentifierField
+          if (user) {
 
             //Update their info
-            user.firstName = providerUserProfile.firstName;
-            user.lastName = providerUserProfile.lastName;
-            user.displayName = providerUserProfile.displayName;
-            user.profileImageURL = providerUserProfile.profileImageURL;
-            user.provider = providerUserProfile.provider;
-            user.providerData = providerUserProfile.providerData;
+            async.series([
+                function(callback) {
+                  if (providerUserProfile.profileImageURL) {
+                    //Get the image from url and download it as temp image
+                    var tmpImage = Date.now();
+                    request
+                      .get(providerUserProfile.profileImageURL)
+                      .on('response', function(response) {
 
-            user.save().then(function() {
+                        if (response.statusCode === 200) {
+                          //Get the image ext
+                          var content_type = response.headers['content-type'];
+                          var imgExt = content_type.split("/")[1];
 
-              req.login(user, function(err) {
-                if (err)
-                  return done(new Error(err), user);
-                return done(false, user);
+                          var imageName = Date.now() + '.' + imgExt;
+                          callback(null, tmpImage, imageName);
+                        }
+
+                      })
+                      .on('error', function(err) {
+                        console.log('err', err)
+                      })
+                      .pipe(fs.createWriteStream('./public/uploads/users/profile/' + tmpImage));
+                  } else {
+                    callback(null, null);
+                  }
+                }
+
+              ],
+              function(err, results) {
+
+                if (results) {
+                  //Rename the temp image
+                  fs.renameSync('./public/uploads/users/profile/' + results[0][0], './public/uploads/users/profile/' + results[0][1], function(err) {
+                    if (err) return done(false, err);
+                  });
+
+                  //Remove the old image
+                  if (user.profileImageURL) {
+                    try {
+                      var stats = fs.lstatSync('./public/uploads/users/profile/' + user.profileImageURL);
+                      if (stats.isFile()) {
+                        fs.unlinkSync('./public/uploads/users/profile/' + user.profileImageURL);
+                      }
+                    } catch (e) {
+                      console.log('Unable to delete the old image', e);
+                    }
+                  }
+
+                  user.profileImageURL = results[0][1];
+                }
+
+                user.firstName = providerUserProfile.firstName;
+                user.lastName = providerUserProfile.lastName;
+                user.displayName = providerUserProfile.displayName;
+
+                user.provider = providerUserProfile.provider;
+                user.providerData = providerUserProfile.providerData;
+
+                user.save().then(function() {
+                  //Login the user
+                  req.login(user, function(err) {
+                    if (err)
+                      return done(new Error(err), user);
+                    return done(false, user);
+                  });
+
+                }).catch(function(err) {
+                  return done(false, err);
+                });
+
               });
 
-            }).catch(function(err) {
-              return done(false, err);
-            });
-
           } else {
+            //New user
             var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
             User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 
               var newUser = {};
 
-              newUser.firstName = providerUserProfile.firstName;
-              newUser.lastName = providerUserProfile.lastName;
-              newUser.username = availableUsername;
-              newUser.displayName = providerUserProfile.displayName;
-              newUser.email = providerUserProfile.email;
-              newUser.profileImageURL = providerUserProfile.profileImageURL;
-              newUser.provider = providerUserProfile.provider;
-              newUser.providerData = providerUserProfile.providerData;
+              async.series([
+                  function(callback) {
+                    if (providerUserProfile.profileImageURL) {
+                      //Get the image from url and download it as temp image
+                      var tmpImage = Date.now();
+                      request
+                        .get(providerUserProfile.profileImageURL)
+                        .on('response', function(response) {
 
-              User.create(newUser).then(function(user) {
-                if (!user) {
-                  return done(false, user);
-                } else {
-                  req.login(user, function(err) {
-                    if (err)
-                      return done(new Error(err), user);
-                    return done(false, user);
+                          if (response.statusCode === 200) {
+                            //Get the image ext
+                            var content_type = response.headers['content-type'];
+                            var imgExt = content_type.split("/")[1];
+
+                            var imageName = Date.now() + '.' + imgExt;
+                            callback(null, tmpImage, imageName);
+                          }
+
+                        })
+                        .on('error', function(err) {
+                          console.log('Unable to download user image', err)
+                        })
+                        .pipe(fs.createWriteStream('./public/uploads/users/profile/' + tmpImage));
+                    } else {
+                      callback(null, null);
+                    }
+                  }
+
+                ],
+                function(err, results) {
+
+                  if (results) {
+                    //Rename the tmp image
+                    fs.renameSync('./public/uploads/users/profile/' + results[0][0], './public/uploads/users/profile/' + results[0][1], function(err) {
+                      if (err) return done(false, err);
+                    });
+
+                    newUser.profileImageURL = results[0][1];
+                  }
+
+                  newUser.firstName = providerUserProfile.firstName;
+                  newUser.lastName = providerUserProfile.lastName;
+                  newUser.username = availableUsername;
+                  newUser.displayName = providerUserProfile.displayName;
+                  newUser.email = providerUserProfile.email;
+                  newUser.provider = providerUserProfile.provider;
+                  newUser.providerData = providerUserProfile.providerData;
+
+                  //Create the user
+                  User.create(newUser).then(function(user) {
+                    if (!user) {
+                      return done(false, user);
+                    } else {
+                      //Login the user
+                      req.login(user, function(err) {
+                        if (err)
+                          return done(new Error(err), user);
+                        return done(false, user);
+                      });
+                    }
+                  }).catch(function(err) {
+                    return done(false, err);
                   });
-                }
-              }).catch(function(err) {
-                return done(false, err);
-              });
+
+                });
 
             });
 
@@ -319,5 +420,12 @@ exports.removeOAuthProvider = function(req, res, next) {
       message: errorHandler.getErrorMessage(err)
     });
   });
+};
 
+var getFileExt = function(fileName) {
+  var fileExt = fileName.split(".");
+  if (fileExt.length === 1 || (fileExt[0] === "" && fileExt.length === 2)) {
+    return "";
+  }
+  return fileExt.pop();
 };
