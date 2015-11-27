@@ -34,15 +34,7 @@
         <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
 
           <span ng-if="authentication.user.profileImageURL">
-
-            <span ng-if="authentication.user.provider == 'local'">
               <img ng-src="/uploads/users/profile/{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-            </span>
-
-            <span ng-if="authentication.user.provider != 'local'">
-              <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-            </span>
-
           </span>
 
           <span ng-if="!authentication.user.profileImageURL">
