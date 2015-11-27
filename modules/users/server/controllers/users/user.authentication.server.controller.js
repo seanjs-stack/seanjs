@@ -228,8 +228,6 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
               newUser.provider = providerUserProfile.provider;
               newUser.providerData = providerUserProfile.providerData;
 
-              newUser.roles = ["user"];
-
               User.create(newUser).then(function(user) {
                 if (!user) {
                   return done(false, user);
