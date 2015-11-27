@@ -37,14 +37,15 @@ module.exports.initLocalVariables = function(app) {
   app.locals.facebookAppId = config.facebook.clientID;
   app.locals.jsFiles = config.files.client.js;
   app.locals.cssFiles = config.files.client.css;
-  app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
+  app.locals.usersProfileDir = config.app.usersProfileDir;
 
   // Passing the request url to environment locals
   app.use(function(req, res, next) {
     res.locals.host = req.protocol + '://' + req.hostname;
     res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
+    app.locals.originUrl = req.protocol + '://' + req.headers.host;
     next();
   });
 };
