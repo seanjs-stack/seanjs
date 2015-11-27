@@ -61,13 +61,18 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var article = req.article;
 
-  article.destroy().then(function() {
-    return res.json(article);
+  Article.destroy({
+    where: {
+      id: article.id
+    }
+  }).then(function(a) {
+    return res.json(a);
   }).catch(function(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
     });
   });
+
 };
 
 /**
@@ -79,13 +84,12 @@ exports.list = function(req, res) {
   }).then(function(articles) {
     if (!articles) {
       return res.status(404).send({
-        message: 'No article with that identifier has been found'
+        message: 'No articles found'
       });
     } else {
       res.json(articles);
     }
   }).catch(function(err) {
-    console.log('err', err);
     res.jsonp(err);
   });
 };
