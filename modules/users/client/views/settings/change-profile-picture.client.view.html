@@ -20,10 +20,10 @@
           <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
           <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
         </div>
-        <div ng-show="success" class="text-center text-success">
+        <div ng-show="error" class="text-center alert alert-success">
           <strong>Profile Picture Changed Successfully</strong>
         </div>
-        <div ng-show="error" class="text-center text-danger">
+        <div ng-show="error" class="text-center alert alert-danger">
           <strong ng-bind="error"></strong>
         </div>
       </fieldset>
