@@ -75,7 +75,7 @@ describe('Article Model Unit Tests:', function() {
   //   done();
   // });
 
-  // TODO FIX
+  // TODO CHECK
   after(function(done) {
     User.destroy({
         where: {
