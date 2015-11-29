@@ -13,6 +13,8 @@ var config = require('../../../../config/config'),
 // Using the redis backend
 acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
 
+console.log('config.redis.host', config.redis.host);
+
 /**
  * Invoke Articles Permissions
  */
