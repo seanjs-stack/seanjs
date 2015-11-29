@@ -11,6 +11,14 @@ var config = require('../../../../config/config'),
  */
 
 // Using the redis backend
+
+//Use redis database 1
+redisInstance.select(1);
+
+if (config.redis.password) {
+  redisInstance.auth(config.redis.password);
+}
+
 acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
 
 console.log('config.redis.host', config.redis.host);
