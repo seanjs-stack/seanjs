@@ -21,8 +21,6 @@ if (config.redis.password) {
 
 acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
 
-console.log('config.redis.host', config.redis.host);
-
 /**
  * Invoke Articles Permissions
  */
