@@ -1,5 +1,9 @@
 ![alt tag](http://www.seanjs.org/modules/core/client/img/brand/logo.png)
 
+```bash
+Pronounced as SEEN.JS
+```
+
 [![Documentation Status](https://readthedocs.org/projects/seanjs/badge/?version=latest)](http://seanjs.readthedocs.org/en/latest/?badge=latest)
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/seanjs-stack/seanjs.svg?branch=master)](https://travis-ci.org/seanjs-stack/seanjs)
@@ -71,10 +75,12 @@ You are now ready to get started with the SEAN.JS generator. The generator will 
 
 > **For MySQL, MariaDB, SQLite and MSSQL**
 
-> Please check the [Template Folder in the SEAN.JS Generator](https://github.com/seanjs-stack/generator-seanjs/tree/master/app/templates/master/modules)
+> Please replace:
+* [user.server.model.js](https://gist.github.com/Massad/3986f4b12d871de8d353#file-user-server-model-js-L6) with `/modules/users/server/models/user.server.model.js`
+* [user.authentication.server.controller.js](https://gist.github.com/Massad/f6f649d60ad3009f7b99#file-user-authentication-server-controller-js-L6) with `/modules/users/server/controllers/users/user.authentication.server.controller.js`
 
-> Simply replace these files and update your database in the `config/env/`
 
+> And update your database in the `config/env/`
 
 ```bash
 $ git clone https://github.com/seanjs-stack/seanjs.git seanjs
