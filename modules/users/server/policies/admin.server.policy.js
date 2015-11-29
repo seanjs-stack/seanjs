@@ -1,12 +1,17 @@
 'use strict';
 
+var config = require('../../../../config/config'),
+  redisInstance = require('redis').createClient(config.redis.port, config.redis.host, {
+    no_ready_check: true
+  }),
+  acl = require('acl');
+
 /**
  * Module dependencies.
  */
-var acl = require('acl');
 
-// Using the memory backend
-acl = new acl(new acl.memoryBackend());
+// Using the redis backend
+acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
 
 /**
  * Invoke Admin Permissions
