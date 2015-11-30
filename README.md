@@ -21,6 +21,8 @@ It is designed to give you a quick and organized way to start developing SEAN ba
 * [Async](https://github.com/caolan/async): Higher-order functions and common patterns for asynchronous code
 * [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js (Facebook, Twitter, LinkedIn, Google and PayPal)
 * [Socket.io](https://github.com/socketio/socket.io): Node.js realtime framework server
+* [reCaptcha](https://www.google.com/recaptcha/intro/index.html): Tough on bots Easy on humans
+* [Nodemailer](https://github.com/andris9/Nodemailer): Send e-mails with Node.JS – easy as cake!
 * And many more...
 
 Based on **MEAN Stack**
