@@ -1,0 +1,81 @@
+<section ng-controller="ContactController">
+
+  <div class="page-header">
+    <h1>Contact Us</h1>
+  </div>
+
+  <div class="col-md-6 col-md-offset-3">
+
+    <form name="contactForm" class="form-horizontal" ng-submit="contact(contactForm.$valid)" novalidate>
+
+      <table class="table table-striped">
+        <tr>
+          <td class="form-group" show-errors>
+            <label for="name">Your Name</label>
+            <input type="text" name="name" ng-model="name" id="name" class="form-control" placeholder="Your name" required>
+            <div ng-messages="contactForm.name.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Your name is required.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="form-group" show-errors>
+            <label for="email">Your Email Address</label>
+            <input type="email" name="email" ng-model="email" id="email" class="form-control" placeholder="Your email address" required>
+            <div ng-messages="contactForm.email.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Your email address is required.</p>
+              <p class="help-block error-text" ng-message="email">Your email address is invalid.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="form-group" show-errors>
+            <label for="subject">Your subject</label>
+            <select name="subject" ng-model="subject" id="subject" class="form-control" required>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+            <div ng-messages="contactForm.message.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Your message is required.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="form-group" show-errors>
+            <label for="message">Your Message</label>
+            <textarea type="text" name="message" ng-model="message" id="message" class="form-control" placeholder="Your message" cols="3" rows="4" required></textarea>
+            <div ng-messages="contactForm.message.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Your message is required.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <div class="g-recaptcha" data-sitekey="6LfCAhITAAAAAFApXamNl5RaCzueaKddwNoJvYfP"></div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <div ng-show="success" class="text-center alert alert-success">
+              <strong ng-bind="success"></strong>
+            </div>
+            <div ng-show="error" class="text-center alert alert-danger">
+              <strong ng-bind="error"></strong>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <button type="submit" class="btn btn-default" ng-disabled="submitButtonDisabled">
+              {{submitButton || 'Send'}}
+            </button>
+          </td>
+        </tr>
+      </table>
+
+    </form>
+
+  </div>
+
+</section>

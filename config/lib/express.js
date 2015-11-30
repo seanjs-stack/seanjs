@@ -21,6 +21,7 @@ var config = require('../config'),
   http = require('http'),
   winston = require('./winston');
 
+
 /**
  * Initialize local variables
  */
@@ -40,6 +41,7 @@ module.exports.initLocalVariables = function(app) {
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
   app.locals.usersProfileDir = config.app.usersProfileDir;
+  app.locals.reCaptchaSecret = config.app.reCaptchaSecret;
 
   // Passing the request url to environment locals
   app.use(function(req, res, next) {
