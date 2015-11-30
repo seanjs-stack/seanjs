@@ -41,6 +41,11 @@ module.exports.start = function start(callback) {
       }
       console.log('--------------------------');
 
+
+      if (!config.app.reCaptchaSecret) {
+        winston.warn('Missing reCaptcha Secret in env!');
+      }
+
       if (callback) callback(app, db, config);
     });
 

@@ -17,7 +17,7 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'
+        'https://www.google.com/recaptcha/api.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
