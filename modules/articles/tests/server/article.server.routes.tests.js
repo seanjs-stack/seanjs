@@ -97,7 +97,7 @@ describe('Article CRUD tests', function() {
                 var articles = articlesGetRes.body;
 
                 // Set assertions
-                (articles[0].user.id).should.equal(userId);
+                (articles[0].userId).should.equal(userId);
                 (articles[0].title).should.match('Article Title');
 
                 // Call the assertion callback
