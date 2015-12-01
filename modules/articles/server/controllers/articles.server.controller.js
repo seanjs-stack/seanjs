@@ -61,12 +61,24 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
   var article = req.article;
 
-  Article.destroy({
-    where: {
-      id: article.id
+  // Find the article
+  Article.findById(article.id).then(function(article) {
+    if (article) {
+
+      // Delete the article
+      article.destroy().then(function() {
+        return res.json(article);
+      }).catch(function(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      });
+
+    } else {
+      return res.status(400).send({
+        message: 'Unable to find the article'
+      });
     }
-  }).then(function(a) {
-    return res.json(a);
   }).catch(function(err) {
     return res.status(400).send({
       message: errorHandler.getErrorMessage(err)
