@@ -47,7 +47,7 @@ describe('Article CRUD tests', function() {
     user.roles = ['admin', 'user'];
 
     // Save a user to the test db and create new article
-    user.save().then(function(saved) {
+    user.save().then(function(user) {
       article = Article.build();
       article = {
         title: 'Article Title',
@@ -348,4 +348,5 @@ describe('Article CRUD tests', function() {
         done();
       }).catch(function(err) {});
   });
+
 });
