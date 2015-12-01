@@ -11,7 +11,7 @@ module.exports = {
     username: process.env.DB_USERNAME || "postgres",
     password: process.env.DB_PASSWORD || "postgres",
     dialect: process.env.DB_DIALECT || "postgres", //mysql, postgres, sqlite3,...
-    enableSequelizeLog: process.env.DB_LOG || true,
+    enableSequelizeLog: process.env.DB_LOG || false,
     ssl: process.env.DB_SSL || false
   },
   redis: {
