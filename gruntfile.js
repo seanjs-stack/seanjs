@@ -252,7 +252,7 @@ module.exports = function(grunt) {
     var server = app.start(function() {
       setTimeout(function() { //for sequelize.sync()
         done();
-      }, 100); //10000
+      }, 1000); //10000
 
     });
   });
