@@ -1,6 +1,8 @@
 'use strict';
 
-var config = require('../../../../config/config'),
+var
+  path = require('path'),
+  config = require(path.resolve('./config/config')),
   redisInstance = require('redis').createClient(config.redis.port, config.redis.host, {
     no_ready_check: true
   }),
