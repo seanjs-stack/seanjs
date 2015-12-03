@@ -27,6 +27,7 @@ describe('Article CRUD tests', function() {
   });
 
   before(function(done) {
+
     // Create user credentials
     credentials = {
       username: 'username',
