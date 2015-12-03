@@ -62,21 +62,28 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 
-  User.find({
-    where: {
-      id: req.model.id
-    }
-  }).then(function(user) {
-    if (user) {
-      user.destroy().then(function() {
-        return res.json(user);
-      }).catch(function(err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
+  if (req.user.id === req.model.id) {
+    return res.status(400).send({
+      message: 'You cannot delete yourself!'
+    });
+  } else {
+    User.find({
+      where: {
+        id: req.model.id
+      }
+    }).then(function(user) {
+      if (user) {
+        user.destroy().then(function() {
+          return res.json(user);
+        }).catch(function(err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
         });
-      });
-    }
-  });
+      }
+    });
+  }
+
 
 };
 

@@ -52,11 +52,11 @@
           <tr>
             <td colspan="2" align="center">
               <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user.id})">
-		Edit <i class="glyphicon glyphicon-edit"></i>
-	      </a>
-              <a class="btn btn-danger" ng-click="remove(user);" ng-if="authentication.user.id == user.id || (authentication.user.roles.indexOf('admin') && authentication.user.roles.indexOf('admin') != -1)">
-		Delete <i class="glyphicon glyphicon-trash"></i>
-	      </a>
+		              Edit <i class="glyphicon glyphicon-edit"></i>
+	            </a>
+              <a class="btn btn-danger" ng-click="remove(user);" ng-if="authentication.user.id !== user.id && (authentication.user.roles.indexOf('admin') !== -1)">
+		              Delete <i class="glyphicon glyphicon-trash"></i>
+	            </a>
             </td>
           </tr>
         </tfoot>
