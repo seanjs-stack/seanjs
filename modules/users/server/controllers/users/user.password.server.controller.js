@@ -137,12 +137,11 @@ exports.reset = function(req, res, next) {
             }
           }
         }).then(function(user) {
-          if (!user) {
+          if (user) {
             if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
               user.password = passwordDetails.newPassword;
               user.resetPasswordToken = undefined;
               user.resetPasswordExpires = undefined;
-
 
               user.save().then(function(saved) {
                 if (!saved) {
@@ -180,7 +179,7 @@ exports.reset = function(req, res, next) {
         });
       },
       function(user, done) {
-        res.render('modules/users/server/templates/reset-password-confirm-email', {
+        res.render(path.resolve('modules/users/server/templates/reset-password-confirm-email'), {
           name: user.displayName,
           appName: config.app.title
         }, function(err, emailHTML) {
