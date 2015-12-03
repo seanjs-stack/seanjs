@@ -1,7 +1,5 @@
 'use strict';
 
-/* grecaptcha */
-
 angular.module('core').controller('ContactController', ['$scope', 'ContactForm',
   function($scope, ContactForm) {
 
