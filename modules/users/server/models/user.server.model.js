@@ -48,20 +48,58 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: ''
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isUnique: function(value, next) {
+          var self = this;
+          User.find({
+              where: {
+                username: value
+              }
+            })
+            .then(function(user) {
+              // reject if a different user wants to use the same email
+              if (user && self.id !== user.id) {
+                return next('Username already exists, please choose another');
+              }
+              return next();
+            })
+            .catch(function(err) {
+              return next(err);
+            });
+        }
+      }
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,
       validate: {
+        isValid: validateLocalStrategyProperty,
         isEmail: {
           msg: 'Please fill a valid email address'
         },
-        isValid: validateLocalStrategyProperty
+        isUnique: function(value, next) {
+          var self = this;
+          User.find({
+              where: {
+                email: value
+              }
+            })
+            .then(function(user) {
+              // reject if a different user wants to use the same email
+              if (user && self.id !== user.id) {
+                return next('Email already exists, please choose another');
+              }
+              return next();
+            })
+            .catch(function(err) {
+              return next(err);
+            });
+        }
       }
-    },
-    username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
     },
     profileImageURL: DataTypes.STRING,
     roles: {
@@ -121,10 +159,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     associate: function(models) {
       if (models.article) {
-        User.hasMany(models.article, {
-          onDelete: 'cascade',
-          hooks: true
-        });
+        User.hasMany(models.article);
       }
     }
   });
