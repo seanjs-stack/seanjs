@@ -1,24 +1,21 @@
 "use strict";
 
-var path = require("path"),
-  Sequelize = require("sequelize"),
-  winston = require('winston'),
+var
+  path = require('path'),
+  config = require(path.resolve('./config/config')),
+  Sequelize = require('sequelize'),
+  winston = require('./winston'),
   db = {};
 
 db.Sequelize = Sequelize;
 db.models = {};
 db.discover = [];
 
-// Define default logger function
-db.logger = function(log) {
-  console.log(log);
-};
-
 // Expose the connection function
 db.connect = function(database, username, password, options) {
 
   if (typeof db.logger === 'function')
-    db.logger("Connecting to: " + database + " as: " + username);
+    winston.info("Connecting to: " + database + " as: " + username);
 
   // Instantiate a new sequelize instance
   var sequelize = new db.Sequelize(database, username, password, options);
@@ -34,24 +31,23 @@ db.connect = function(database, username, password, options) {
   Object.keys(db.models).forEach(function(modelName) {
     if (db.models[modelName].options.hasOwnProperty('associate')) {
       db.models[modelName].options.associate(db.models);
-      if (typeof db.logger === 'function')
-        db.logger("Associating Model: " + modelName);
+      winston.info("Associating Model: " + modelName);
     }
   });
 
-  // Synchronizing any model changes with database.
-  // WARNING: this will DROP your database everytime you re-run your application
-  sequelize.sync()
-    .then(function() {
-      winston.info("Database synchronized");
-    }).catch(function(err) {
-      winston.error("An error occured: %j", err);
-    });
+  if (config.db.sync) {
+    // Synchronizing any model changes with database.
+    sequelize.sync()
+      .then(function() {
+        winston.info("Database synchronized");
+      }).catch(function(err) {
+        winston.error("An error occured: %j", err);
+      });
+  }
 
   db.sequelize = sequelize;
 
-  if (typeof db.logger === 'function')
-    db.logger("Finished Connecting to Database");
+  winston.info("Finished Connecting to Database");
 
   return true;
 };

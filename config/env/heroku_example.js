@@ -12,6 +12,7 @@ module.exports = {
     dialect: "postgres",
     enableSequelizeLog: false,
     ssl: true,
+    sync: process.env.DB_SYNC || false //Synchronizing any model changes with database
   },
   redis: {
     host: process.env.REDIS_HOST || "localhost",

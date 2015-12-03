@@ -16,7 +16,8 @@ module.exports = {
     password: process.env.DB_PASSWORD || "postgres",
     dialect: process.env.DB_DIALECT || "postgres", //mysql, postgres, sqlite3,...
     enableSequelizeLog: process.env.DB_LOG || false,
-    ssl: process.env.DB_SSL || false
+    ssl: process.env.DB_SSL || false,
+    sync: process.env.DB_SYNC || true //Synchronizing any model changes with database
   },
   redis: {
     host: process.env.REDIS_HOST || "localhost",

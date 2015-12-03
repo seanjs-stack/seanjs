@@ -7,7 +7,8 @@ var _ = require('lodash'),
   chalk = require('chalk'),
   glob = require('glob'),
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  winston = require(path.resolve('./config/lib/winston'));
 
 /**
  * Get files by glob patterns
@@ -53,17 +54,17 @@ var getGlobbedPaths = function(globPatterns, excludes) {
  */
 var validateEnvironmentVariable = function() {
   var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
-  console.log();
+  console.log('\n');
   if (!environmentFiles.length) {
     if (process.env.NODE_ENV) {
-      console.error(chalk.red('+ Error: No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead'));
+      winston.error(chalk.red('Error: No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead \n'));
     } else {
-      console.error(chalk.red('+ Error: NODE_ENV is not defined! Using default development environment'));
+      winston.warn(chalk.red('NODE_ENV') + ' is not defined! Using default development environment \n');
     }
     process.env.NODE_ENV = 'development';
   }
   // Reset console color
-  console.log(chalk.white(''));
+  winston.log(chalk.white(''));
 };
 
 /**
@@ -80,9 +81,8 @@ var validateSecureMode = function(config) {
   var certificate = fs.existsSync(path.resolve(config.secure.certificate));
 
   if (!privateKey || !certificate) {
-    console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
-    console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
-    console.log();
+    winston.error('Certificate file or key file is missing, falling back to non-SSL mode');
+    winston.error('To create them, simply run the following from your shell: ' + chalk.yellow('sh ./scripts/generate-ssl-certs.sh') + ' \n');
     config.secure.ssl = false;
   }
 };
