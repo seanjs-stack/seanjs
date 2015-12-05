@@ -42,6 +42,7 @@ module.exports.initLocalVariables = function(app) {
   app.locals.favicon = config.favicon;
   app.locals.usersProfileDir = config.app.usersProfileDir;
   app.locals.reCaptchaSecret = config.app.reCaptchaSecret;
+  app.locals.livereload = config.livereload;
 
   // Passing the request url to environment locals
   app.use(function(req, res, next) {

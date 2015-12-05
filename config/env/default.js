@@ -5,7 +5,7 @@ module.exports = {
     title: 'SEAN.JS',
     description: 'Full-Stack Javascript with SequelizeJS, ExpressJS, AngularJS, and Node.js',
     keywords: 'sequelizejs, expressjs, angularjs, nodejs, postgresql, mysql, sqlite3, passport, redis, socket.io',
-    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID',
+    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || '',
     reCaptchaSecret: process.env.RECAPTCHA_SECRET || ''
   },
   port: process.env.PORT || 3000,
