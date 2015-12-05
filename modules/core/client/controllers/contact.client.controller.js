@@ -12,7 +12,7 @@ angular.module('core').controller('ContactController', ['$scope', 'ContactForm',
         return false;
       }
 
-      if (grecaptcha.getResponse() === "") { // jshint ignore:line
+      if (grecaptcha.getResponse() === "") {
         $scope.error = "Please resolve the captcha first!";
       } else {
         var contactForm = new ContactForm({
@@ -21,7 +21,7 @@ angular.module('core').controller('ContactController', ['$scope', 'ContactForm',
           subject: this.subject,
           message: this.message,
           //Get the captcha value and send it to the server for verifing
-          grecaptcha: grecaptcha.getResponse() // jshint ignore:line
+          grecaptcha: grecaptcha.getResponse()
         });
 
         $scope.submitButton = "Working...";
@@ -29,12 +29,12 @@ angular.module('core').controller('ContactController', ['$scope', 'ContactForm',
 
         contactForm.$save(function(response) {
           //Reset the reCaptcha
-          grecaptcha.reset(); // jshint ignore:line
+          grecaptcha.reset();
           $scope.success = response.message;
         }, function(errorResponse) {
           console.log('errorResponse', errorResponse);
           //Reset the reCaptcha
-          grecaptcha.reset(); // jshint ignore:line
+          grecaptcha.reset();
           $scope.error = errorResponse.data.message;
         });
 
