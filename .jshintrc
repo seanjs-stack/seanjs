@@ -15,7 +15,9 @@
   "globals": { // Globals variables.
     "angular": true,
     "io": true,
-    "ApplicationConfiguration": true
+    "ApplicationConfiguration": true,
+    "ga": true,
+    "grecaptcha": true
   },
   "predef": [ // Extra globals.
     "inject",
