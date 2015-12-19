@@ -54,6 +54,8 @@ Local development and testing with compose:
 $ docker-compose up
 ```
 
+>Note: You might want to try this command `eval "$(docker-machine env default)"` in the project directory root to activate Docker
+
 ---
 
 ### Installation
