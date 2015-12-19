@@ -32,6 +32,29 @@ Based on **MEAN Stack**
 ### Live Example: [http://seanjs.herokuapp.com](http://seanjs.herokuapp.com)
 
 ---
+### For quick development and deployment:
+
+**Install:**
+* [Docker](https://docs.docker.com/installation/#installation)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+
+
+Using Docker, you don't have to install any prerequisites in your machine.
+Just install Docker, run `docker-compose up` and you are up and running!
+
+You will have these containers created for you:
+
+* Nodejs (4.2.3)
+* PostgreSQL (Latest)
+* Redis (Latest)
+
+
+Local development and testing with compose:
+```bash
+$ docker-compose up
+```
+
+---
 
 ### Installation
 
