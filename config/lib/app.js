@@ -39,6 +39,9 @@ module.exports.start = function start(callback) {
       if (config.seanjs['seanjs-version']) {
         console.log(chalk.green('SEAN.JS version:\t') + config.seanjs['seanjs-version']);
       }
+
+      console.info(chalk.green('App URL:\t\t') + (process.env.NODE_HOST || 'localhost') + ":" + config.port);
+
       console.log('--------------------------');
 
 
