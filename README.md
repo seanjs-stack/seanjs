@@ -39,8 +39,8 @@ Based on **MEAN Stack**
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
 
-Using Docker, you don't have to install any prerequisites in your machine.
-Just install Docker, run `docker-compose up` and you are up and running!
+Using Docker, you don't have to install any prerequisites on your machine.
+Just install [Docker](https://docs.docker.com/installation/#installation), run `docker-compose up` and you are up and running!
 
 You will have these containers created for you:
 
