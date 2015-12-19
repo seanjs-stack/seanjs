@@ -1,0 +1,25 @@
+postgres:
+  restart: always
+  image: postgres:latest
+  ports:
+    - "5432:5432"
+  environment:
+    LC_ALL: C.UTF-8
+    POSTGRES_DB: seanjs_dev
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+
+redis:
+  restart: always
+  image: redis:latest
+  ports:
+    - "6379:6379"
+
+web:
+  build: .
+  links:
+   - postgres:postgres
+  ports:
+   - "3000:3000"
+  environment:
+   NODE_ENV: development
