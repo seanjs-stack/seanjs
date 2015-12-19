@@ -54,7 +54,9 @@ Local development and testing with compose:
 $ docker-compose up
 ```
 
->Note: You might want to try this command `eval "$(docker-machine env default)"` in the project directory root to activate Docker
+> Note: You might want to try this command `eval "$(docker-machine env default)"` in the project directory root to activate Docker
+
+*By default, the url will be: [http://192.168.99.100:3000](http://192.168.99.100:3000)*
 
 ---
 
