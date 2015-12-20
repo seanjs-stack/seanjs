@@ -12,7 +12,7 @@ Pronounced as SEEN.JS
 [![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](http://seanjs.herokuapp.com)
 [![Built with Grunt](https://img.shields.io/badge/built%20with-GRUNT-orange.svg)](http://gruntjs.com/)
 
-[![NPM](https://nodei.co/npm/generator-seanjs.png?downloads=true)](https://nodei.co/npm/generator-seanjs/)
+[![NPM](https://nodei.co/npm/generator-seanjs.png?downloads=true&downloadRank=true)](https://nodei.co/npm/generator-seanjs/)
 
 **SEAN.JS** is a Full-Stack Javascript for an easy starting point with [**S**equilizeJS](http://sequelize.readthedocs.org/en/latest/), [**E**xpressJS](http://expressjs.com/), [**A**ngularJS](https://angularjs.org/) and [**N**odeJS](https://nodejs.org/en/) based applications.
 It is designed to give you a quick and organized way to start developing SEAN based web apps.
