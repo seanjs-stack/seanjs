@@ -24,6 +24,8 @@ public/uploads/users/profile/*
 config/env/local.js
 *.pem
 
+modules/*/client/css
+
 modules/users/server/controllers/users/local/*
 modules/users/server/models/local/*
 
