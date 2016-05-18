@@ -3,25 +3,30 @@
 var
   path = require('path'),
   config = require(path.resolve('./config/config')),
-  redisInstance = require('redis').createClient(config.redis.port, config.redis.host, {
-    no_ready_check: true
-  }),
   acl = require('acl');
 
 /**
  * Module dependencies.
  */
 
-// Using the redis backend
+ // Using the redis backend
+ /*
+ var redisInstance = require('redis').createClient(config.redis.port, config.redis.host, {
+   no_ready_check: true
+ });
 
-//Use redis database 1
-redisInstance.select(1);
+ //Use redis database 1
+ redisInstance.select(1);
 
-if (config.redis.password) {
-  redisInstance.auth(config.redis.password);
-}
+ if (config.redis.password) {
+   redisInstance.auth(config.redis.password);
+ }
 
-acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
+ acl = new acl(new acl.redisBackend(redisInstance, 'acl'));
+ */
+
+ // Using the memory backend
+ acl = new acl(new acl.memoryBackend());
 
 /**
  * Invoke Admin Permissions
