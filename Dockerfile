@@ -3,6 +3,7 @@ FROM node:4.2.3
 # Install gem sass for grunt-contrib-sass
 RUN apt-get update -qq && apt-get install -y build-essential
 RUN apt-get install -y ruby
+RUN apt-get install -y libssl-dev ruby
 RUN gem install sass
 
 WORKDIR /home/seanjs
