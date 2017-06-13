@@ -14,7 +14,11 @@ matrix:
 
 services:
   - redis-server
+  - postgresql
 # gcc 4.8 requires ubuntu-toolchain-r-test
+
+dist: trusty
+
 addons:
   postgresql: "9.6"
   apt:
