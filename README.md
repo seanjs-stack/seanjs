@@ -6,9 +6,9 @@ Pronounced as SEEN.JS
 
 [![Documentation Status](https://readthedocs.org/projects/seanjs/badge/?version=latest)](http://seanjs.readthedocs.org/en/latest/?badge=latest)
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/seanjs-stack/seanjs.svg?branch=master)](https://travis-ci.org/seanjs-stack/seanjs)
+[![Build Status](https://travis-ci.org/twelve-net-co/seanjs.svg?branch=master)](https://travis-ci.org/twelve-net-co/seanjs)
 [![Dependencies Status](https://david-dm.org/twelve-net-co/seanjs.svg)](https://david-dm.org/twelve-net-co/seanjs)
-[![bitHound Overall Score](https://www.bithound.io/github/seanjs-stack/seanjs/badges/score.svg)](https://www.bithound.io/github/seanjs-stack/seanjs)
+[![bitHound Overall Score](https://www.bithound.io/github/twelve-net-co/seanjs/badges/score.svg)](https://www.bithound.io/github/twelve-net-co/seanjs)
 [![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](http://seanjs.herokuapp.com)
 [![Built with Grunt](https://img.shields.io/badge/built%20with-GRUNT-orange.svg)](http://gruntjs.com/)
 
