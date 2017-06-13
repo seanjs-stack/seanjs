@@ -1,4 +1,4 @@
-![alt tag](http://www.seanjs.org/modules/core/client/img/brand/logo.png)
+![alt tag](https://seanjs.org/img/logo.png)
 
 ```bash
 Pronounced as SEEN.JS
