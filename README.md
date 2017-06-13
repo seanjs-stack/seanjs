@@ -6,9 +6,9 @@ Pronounced as SEEN.JS
 
 [![Documentation Status](https://readthedocs.org/projects/seanjs/badge/?version=latest)](http://seanjs.readthedocs.org/en/latest/?badge=latest)
 [![Join the chat at https://gitter.im/seanjs-stack/seanjs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seanjs-stack/seanjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/twelve-net-co/seanjs.svg?branch=master)](https://travis-ci.org/twelve-net-co/seanjs)
-[![Dependencies Status](https://david-dm.org/twelve-net-co/seanjs.svg)](https://david-dm.org/twelve-net-co/seanjs)
-[![bitHound Overall Score](https://www.bithound.io/github/twelve-net-co/seanjs/badges/score.svg)](https://www.bithound.io/github/twelve-net-co/seanjs)
+[![Build Status](https://travis-ci.org/seanjs-stack/seanjs.svg?branch=master)](https://travis-ci.org/seanjs-stack/seanjs)
+[![Dependencies Status](https://david-dm.org/seanjs-stack/seanjs.svg)](https://david-dm.org/seanjs-stack/seanjs)
+[![bitHound Overall Score](https://www.bithound.io/github/seanjs-stack/seanjs/badges/score.svg)](https://www.bithound.io/github/seanjs-stack/seanjs)
 [![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)](http://seanjs.herokuapp.com)
 [![Built with Grunt](https://img.shields.io/badge/built%20with-GRUNT-orange.svg)](http://gruntjs.com/)
 
@@ -18,7 +18,7 @@ Pronounced as SEEN.JS
 It is designed to give you a quick and organized way to start developing SEAN based web apps.
 
 ## Configured with
-* [RedisStore](https://github.com/optimalbits/node_acl): Redis session store backed by node_redis, and is insanely fast!
+* [RedisStore](https://github.com/tj/connect-redis): Redis session store backed by node_redis, and is insanely fast!
 * [ACL](https://github.com/optimalbits/node_acl): An Access Control List module, based on Redis with Express middleware support
 * [Async](https://github.com/caolan/async): Higher-order functions and common patterns for asynchronous code
 * [Passport](https://github.com/jaredhanson/passport): Simple, unobtrusive authentication for Node.js (Facebook, Twitter, LinkedIn, Google and PayPal)
