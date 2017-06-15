@@ -65,7 +65,6 @@ describe('User CRUD tests', function() {
         .end(function(signupErr, signupRes) {
           // Handle signpu error
           if (signupErr) {
-            console.log('signupErr', signupErr);
             return done(signupErr);
           }
 

@@ -125,20 +125,6 @@ module.exports = function(sequelize, DataTypes) {
     resetPasswordToken: DataTypes.STRING,
     resetPasswordExpires: DataTypes.BIGINT
   }, {
-    instanceMethods: {
-      makeSalt: function() {
-        return crypto.randomBytes(16).toString('base64');
-      },
-      authenticate: function(plainText) {
-        return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
-      },
-      encryptPassword: function(password, salt) {
-        if (!password || !salt)
-          return '';
-        salt = new Buffer(salt, 'base64');
-        return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
-      }
-    },
     classMethods: {
       findUniqueUsername: function(username, suffix, callback) {
         var _this = this;
@@ -156,13 +142,29 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
       }
-    },
-    associate: function(models) {
-      if (models.article) {
-        User.hasMany(models.article);
-      }
     }
   });
+
+  User.prototype.makeSalt = function() {
+    return crypto.randomBytes(16).toString('base64');
+  };
+
+  User.prototype.authenticate = function(plainText) {
+    return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
+  };
+
+  User.prototype.encryptPassword = function(password, salt) {
+    if (!password || !salt)
+      return '';
+    salt = new Buffer(salt, 'base64');
+    return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  };
+
+  User.associate = function(models) {
+    if (models.article) {
+      User.hasMany(models.article);
+    }
+  };
 
   return User;
 };

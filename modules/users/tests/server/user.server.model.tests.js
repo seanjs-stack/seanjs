@@ -129,7 +129,6 @@ describe('User Model Unit Tests:', function() {
     //     should.not.exist((success) ? null : errorHandler.getErrorMessage(success));
     //     user1.roles = ['invalid-user-role-enum'];
     //     user1.save().then(function(err) {
-    //       console.log('err', err);
     //       should.exist((err) ? err : null);
     //       user1.destroy().then(function(err) {
     //         should.not.exist((err) ? null : errorHandler.getErrorMessage(err));

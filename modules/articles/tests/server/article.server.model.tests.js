@@ -31,7 +31,6 @@ describe('Article Model Unit Tests:', function() {
     user.salt = user.makeSalt();
     user.hashedPassword = user.encryptPassword('S3@n.jsI$Aw3$0m3', user.salt);
 
-
     user.save().then(function(user) {
       article = Article.build({
         title: 'Article Title',
